@@ -1,0 +1,227 @@
+/* Navigation Styles */
+
+/* Main navigation container */
+.navigation {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Arial', sans-serif;
+  animation: navigationSlideDown 0.8s ease-out;
+}
+
+@keyframes navigationSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navigation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* Logo styling */
+.navigation-logo {
+  flex-shrink: 0;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-image {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo-link:hover .logo-image {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.logo-fallback {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-fallback::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.logo-initials {
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  position: relative;
+}
+
+.logo-link:hover .logo-fallback {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.logo-link:hover .logo-fallback::before {
+  left: 100%;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #667eea;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navigation menu styling */
+.navigation-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+.navigation-item {
+  margin: 0;
+}
+
+.navigation-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navigation-link:hover {
+  color: #667eea;
+  background-color: #f8f9fa;
+}
+
+.navigation-link-active {
+  color: #667eea;
+  background-color: #f0f2ff;
+  font-weight: 600;
+}
+
+.navigation-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .navigation-container {
+    padding: 0 15px;
+    height: 60px;
+  }
+  
+  .logo-image {
+    height: 38px;
+  }
+  
+  .logo-fallback {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .logo-initials {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+  }
+  
+  .navigation-menu {
+    gap: 15px;
+  }
+  
+  .navigation-link {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-image {
+    height: 32px;
+  }
+  
+  .logo-fallback {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logo-initials {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .navigation-menu {
+    gap: 10px;
+  }
+  
+  .navigation-link {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+}
