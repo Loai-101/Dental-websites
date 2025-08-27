@@ -5,6 +5,9 @@ import './App.css';
 // Import Navigation component
 import Navigation from './components/Navigation/Navigation';
 
+// Import ScrollToTop component
+import ScrollToTop from './components/ScrollToTop';
+
 // Import all page components
 import Home from './components/Home/Home';
 import Contact from './components/contact/Contact';
@@ -16,6 +19,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Navigation />
         <main className="App-main">
           <Routes>
