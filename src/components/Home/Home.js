@@ -18,14 +18,14 @@ const Home = () => {
 
   const [imageErrors, setImageErrors] = useState({});
   const [videoError, setVideoError] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isIPad, setIsIPad] = useState(false);
 
-  // Check if device is mobile/iPad
+  // Check if device is iPad specifically
   useEffect(() => {
     const checkDevice = () => {
       const userAgent = navigator.userAgent.toLowerCase();
-      const isMobileDevice = /ipad|iphone|ipod|android|blackberry|windows phone/g.test(userAgent);
-      setIsMobile(isMobileDevice);
+      const isIPadDevice = /ipad/g.test(userAgent);
+      setIsIPad(isIPadDevice);
     };
     
     checkDevice();
@@ -93,7 +93,7 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <div className="hero-video-background">
-          {!videoError && !isMobile ? (
+          {!videoError && !isIPad ? (
             <video 
               className="hero-video-bg"
               autoPlay
