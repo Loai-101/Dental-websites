@@ -9,6 +9,8 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Contact from './components/contact/Contact';
 import FAQ from './components/FAQ/FAQ';
+import Programmers from './components/Programmers/Programmers';
+import Services from './components/Services/Services';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/programmers" element={<Programmers />} />
+            <Route path="/services" element={<Services />} />
           </Routes>
         </main>
       </div>

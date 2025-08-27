@@ -27,6 +27,12 @@ const Home = () => {
     { icon: "Eye", en: "Ophthalmology", ar: "عيون" },
   ];
 
+  const handleVisitDemo = () => {
+    // Link to dental demo website
+    const demoUrl = 'https://dental-sqm1.vercel.app';
+    window.open(demoUrl, '_blank');
+  };
+
   return (
     <div className="home-container">
       <header className="home-header">
@@ -125,6 +131,15 @@ const Home = () => {
                 </div>
                 <h3 className="specialty-name-en">{specialty.en}</h3>
                 <p className="specialty-name-ar">{specialty.ar}</p>
+                {specialty.en === "Dental" ? (
+                  <button onClick={handleVisitDemo} className="visit-demo-button">
+                    Visit Demo
+                  </button>
+                ) : (
+                  <div className="coming-soon-badge">
+                    Coming Soon
+                  </div>
+                )}
               </div>
             ))}
           </div>

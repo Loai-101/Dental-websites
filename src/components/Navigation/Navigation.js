@@ -53,20 +53,39 @@ const Navigation = () => {
           
           <li className="navigation-item">
             <Link 
+              to="/services" 
+              className={`navigation-link ${isActive('/services') ? 'navigation-link-active' : ''}`}
+            >
+              Services
+            </Link>
+          </li>
+          
+          <li className="navigation-item">
+            <Link 
+              to="/programmers" 
+              className={`navigation-link ${isActive('/programmers') ? 'navigation-link-active' : ''}`}
+            >
+              Team
+            </Link>
+          </li>
+          
+          <li className="navigation-item">
+            <Link 
               to="/contact" 
               className={`navigation-link ${isActive('/contact') ? 'navigation-link-active' : ''}`}
             >
               Contact
             </Link>
           </li>
-                         <li className="navigation-item">
-                 <Link
-                   to="/faq"
-                   className={`navigation-link ${isActive('/faq') ? 'navigation-link-active' : ''}`}
-                 >
-                   Steps
-                 </Link>
-               </li>
+          
+          <li className="navigation-item">
+            <Link
+              to="/faq"
+              className={`navigation-link ${isActive('/faq') ? 'navigation-link-active' : ''}`}
+            >
+              FAQ
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
