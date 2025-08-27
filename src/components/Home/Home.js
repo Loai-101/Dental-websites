@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSEO } from '../../hooks/useSEO';
 import './Home.css';
 
@@ -16,6 +16,8 @@ const Home = () => {
     twitterDescription: "Discover our premium collection of medical clinic websites. Professional, modern, and tailored designs for dental, dermatology, cardiology, and more medical specialties."
   });
 
+  const [imageErrors, setImageErrors] = useState({});
+
   const specialties = [
     { icon: "Tooth", en: "Dental", ar: "أسنان" },
     { icon: "Sparkles", en: "Derma & Laser", ar: "جلدية و ليزر" },
@@ -31,6 +33,41 @@ const Home = () => {
     // Link to dental demo website
     const demoUrl = 'https://dental-sqm1.vercel.app';
     window.open(demoUrl, '_blank');
+  };
+
+  const handleImageError = (specialtyName) => {
+    setImageErrors(prev => ({
+      ...prev,
+      [specialtyName]: true
+    }));
+  };
+
+  const getImageUrl = (specialtyName) => {
+    const imageUrls = {
+      "Dental": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg",
+      "Derma & Laser": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/laser-dermatology_946691-1729_xw7hjz.avif",
+      "Physiotherapy": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.avif",
+      "Cardiology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116278/387577_ixnm8c.png",
+      "General & Family": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
+      "Pediatrics": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119639/pediatrics-icon_pnefev.png",
+      "ENT": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/images_h2upzi.png",
+      "Ophthalmology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/2857950_n6sfqr.png"
+    };
+    return imageUrls[specialtyName];
+  };
+
+  const getFallbackIcon = (specialtyName) => {
+    const fallbackIcons = {
+      "Dental": "🦷",
+      "Derma & Laser": "✨",
+      "Physiotherapy": "💪",
+      "Cardiology": "❤️",
+      "General & Family": "👨‍⚕️",
+      "Pediatrics": "👶",
+      "ENT": "👂",
+      "Ophthalmology": "👁️"
+    };
+    return fallbackIcons[specialtyName] || "🏥";
   };
 
   return (
@@ -72,61 +109,18 @@ const Home = () => {
             {specialties.map((specialty, index) => (
               <div key={index} className="specialty-card">
                 <div className="specialty-logo-placeholder">
-                  {specialty.en === "Dental" && (
+                  {!imageErrors[specialty.en] ? (
                     <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg" 
-                      alt="Dental Logo" 
+                      src={getImageUrl(specialty.en)}
+                      alt={`${specialty.en} Logo`}
                       className="specialty-logo"
+                      onError={() => handleImageError(specialty.en)}
+                      loading="lazy"
                     />
-                  )}
-                  {specialty.en === "Derma & Laser" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/laser-dermatology_946691-1729_xw7hjz.avif" 
-                      alt="Derma & Laser Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "Physiotherapy" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.avif" 
-                      alt="Physiotherapy Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "Cardiology" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116278/387577_ixnm8c.png" 
-                      alt="Cardiology Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "General & Family" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp" 
-                      alt="General & Family Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "Pediatrics" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119639/pediatrics-icon_pnefev.png" 
-                      alt="Pediatrics Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "ENT" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/images_h2upzi.png" 
-                      alt="ENT Logo" 
-                      className="specialty-logo"
-                    />
-                  )}
-                  {specialty.en === "Ophthalmology" && (
-                    <img 
-                      src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/2857950_n6sfqr.png" 
-                      alt="Ophthalmology Logo" 
-                      className="specialty-logo"
-                    />
+                  ) : (
+                    <div className="specialty-logo-fallback">
+                      <span className="fallback-icon">{getFallbackIcon(specialty.en)}</span>
+                    </div>
                   )}
                 </div>
                 <h3 className="specialty-name-en">{specialty.en}</h3>
