@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSEO } from '../../hooks/useSEO';
 import './Home.css';
 
@@ -17,6 +17,21 @@ const Home = () => {
   });
 
   const [imageErrors, setImageErrors] = useState({});
+  const [videoError, setVideoError] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile/iPad
+  useEffect(() => {
+    const checkDevice = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /ipad|iphone|ipod|android|blackberry|windows phone/g.test(userAgent);
+      setIsMobile(isMobileDevice);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
 
   const specialties = [
     { icon: "Tooth", en: "Dental", ar: "أسنان" },
@@ -40,6 +55,10 @@ const Home = () => {
       ...prev,
       [specialtyName]: true
     }));
+  };
+
+  const handleVideoError = () => {
+    setVideoError(true);
   };
 
   const getImageUrl = (specialtyName) => {
@@ -74,18 +93,35 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <div className="hero-video-background">
-          <video 
-            className="hero-video-bg"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source 
-              src="https://res.cloudinary.com/dvybb2xnc/video/upload/v1756122457/WhatsApp_Video_2025-08-25_at_14.47.20_b573fc15_cehood.mp4" 
-              type="video/mp4" 
-            />
-          </video>
+          {!videoError && !isMobile ? (
+            <video 
+              className="hero-video-bg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onError={handleVideoError}
+            >
+              <source 
+                src="https://res.cloudinary.com/dvybb2xnc/video/upload/v1756122457/WhatsApp_Video_2025-08-25_at_14.47.20_b573fc15_cehood.mp4" 
+                type="video/mp4" 
+              />
+              <source 
+                src="https://res.cloudinary.com/dvybb2xnc/video/upload/v1756122457/WhatsApp_Video_2025-08-25_at_14.47.20_b573fc15_cehood.webm" 
+                type="video/webm" 
+              />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <div className="hero-fallback-image">
+              <img 
+                src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg"
+                alt="Medical Website Background"
+                className="hero-bg-image"
+              />
+            </div>
+          )}
           <div className="hero-overlay"></div>
         </div>
         <div className="hero-content">
