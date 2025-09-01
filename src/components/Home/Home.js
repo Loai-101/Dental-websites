@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSEO } from '../../hooks/useSEO';
 import './Home.css';
 
@@ -18,22 +18,6 @@ const Home = () => {
 
   const [imageErrors, setImageErrors] = useState({});
   const [videoError, setVideoError] = useState(false);
-  const [isIPad, setIsIPad] = useState(false);
-
-  // Check if device is iPad specifically (covers iPadOS 13+ reporting as Mac)
-  useEffect(() => {
-    const checkDevice = () => {
-      const ua = (navigator.userAgent || navigator.vendor || '').toString();
-      const isIpadLegacy = /iPad/i.test(ua);
-      const isIpadOS13Plus = navigator.platform === 'MacIntel' && Number(navigator.maxTouchPoints) > 1;
-      const isIpadPro = /Macintosh/i.test(ua) && Number(navigator.maxTouchPoints) > 1;
-      setIsIPad(isIpadLegacy || isIpadOS13Plus || isIpadPro);
-    };
-
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    return () => window.removeEventListener('resize', checkDevice);
-  }, []);
 
   const specialties = [
     { icon: "Tooth", en: "Dental", ar: "أسنان" },
@@ -93,7 +77,7 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <div className="hero-video-background">
-          {!videoError && !isIPad ? (
+          {!videoError ? (
             <video 
               className="hero-video-bg"
               autoPlay
