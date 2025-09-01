@@ -26,7 +26,8 @@ const Home = () => {
       const ua = (navigator.userAgent || navigator.vendor || '').toString();
       const isIpadLegacy = /iPad/i.test(ua);
       const isIpadOS13Plus = navigator.platform === 'MacIntel' && Number(navigator.maxTouchPoints) > 1;
-      setIsIPad(isIpadLegacy || isIpadOS13Plus);
+      const isIpadPro = /Macintosh/i.test(ua) && Number(navigator.maxTouchPoints) > 1;
+      setIsIPad(isIpadLegacy || isIpadOS13Plus || isIpadPro);
     };
 
     checkDevice();
@@ -60,13 +61,11 @@ const Home = () => {
     setVideoError(true);
   };
 
-  const heroPoster = "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg";
-
   const getImageUrl = (specialtyName) => {
     const imageUrls = {
       "Dental": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg",
       "Derma & Laser": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
-      "Physiotherapy": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.avif",
+      "Physiotherapy": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.png",
       "Cardiology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116278/387577_ixnm8c.png",
       "General & Family": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
       "Pediatrics": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119639/pediatrics-icon_pnefev.png",
@@ -119,7 +118,7 @@ const Home = () => {
           ) : (
             <div className="hero-fallback-image">
               <img 
-                src={heroPoster}
+                src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg"
                 alt="Medical Website Background"
                 className="hero-bg-image"
                 decoding="async"
