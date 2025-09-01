@@ -102,7 +102,6 @@ const Home = () => {
               loop
               playsInline
               preload="metadata"
-              poster={heroPoster}
               disablePictureInPicture
               controls={false}
               onError={handleVideoError}
