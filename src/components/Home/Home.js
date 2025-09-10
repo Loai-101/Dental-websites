@@ -21,7 +21,7 @@ const Home = () => {
 
   const specialties = [
     { icon: "Tooth", en: "Dental", ar: "أسنان" },
-    { icon: "Sparkles", en: "Derma & Laser", ar: "جلدية و ليزر" },
+    { icon: "Sparkles", en: "Vet Clinic", ar: "عيادة بيطرية" },
     { icon: "Activity", en: "Physiotherapy", ar: "علاج طبيعي" },
     { icon: "HeartPulse", en: "Cardiology", ar: "أمراض القلب" },
     { icon: "Stethoscope", en: "General & Family", ar: "طب عام و عائلة" },
@@ -48,7 +48,7 @@ const Home = () => {
   const getImageUrl = (specialtyName) => {
     const imageUrls = {
       "Dental": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg",
-      "Derma & Laser": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
+      "Vet Clinic": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1757501000/2105138_xr0c1a.png",
       "Physiotherapy": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.png",
       "Cardiology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116278/387577_ixnm8c.png",
       "General & Family": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
@@ -62,7 +62,7 @@ const Home = () => {
   const getFallbackIcon = (specialtyName) => {
     const fallbackIcons = {
       "Dental": "🦷",
-      "Derma & Laser": "✨",
+      "Vet Clinic": "🐾",
       "Physiotherapy": "💪",
       "Cardiology": "❤️",
       "General & Family": "👨‍⚕️",
@@ -157,6 +157,10 @@ const Home = () => {
                   </button>
                 ) : specialty.en === "Physiotherapy" ? (
                   <button onClick={() => openDemo('https://physiotherapy-clinic-website.vercel.app/')} className="visit-demo-button">
+                    Visit Demo
+                  </button>
+                ) : specialty.en === "Vet Clinic" ? (
+                  <button onClick={() => openDemo('https://vet-website-five.vercel.app/')} className="visit-demo-button">
                     Visit Demo
                   </button>
                 ) : (
