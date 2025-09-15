@@ -167,6 +167,10 @@ const Home = () => {
                   <button onClick={() => openDemo('https://cardiology-website-mu.vercel.app/')} className="visit-demo-button">
                     Visit Demo
                   </button>
+                ) : specialty.en === "General & Family" ? (
+                  <button onClick={() => openDemo('https://general-family.vercel.app/')} className="visit-demo-button">
+                    Visit Demo
+                  </button>
                 ) : (
                   <div className="coming-soon-badge">
                     Coming Soon
