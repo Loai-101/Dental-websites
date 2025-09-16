@@ -27,7 +27,7 @@ const Home = () => {
     { icon: "Stethoscope", en: "General & Family", ar: "طب عام و عائلة" },
     { icon: "Baby", en: "Pediatrics", ar: "أطفال" },
     { icon: "Ear", en: "ENT", ar: "أنف و أذن و حنجرة" },
-    { icon: "Eye", en: "Ophthalmology", ar: "عيون" },
+    { icon: "Eye", en: "Dr Profile", ar: "عيون" },
   ];
 
   const openDemo = (url) => {
@@ -54,7 +54,7 @@ const Home = () => {
       "General & Family": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
       "Pediatrics": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119639/pediatrics-icon_pnefev.png",
       "ENT": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/images_h2upzi.png",
-      "Ophthalmology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/2857950_n6sfqr.png"
+      "Dr Profile": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1758008787/female-portrait-medical-doctor-profile-flat-design-free-vector_mv3xdy.jpg"
     };
     return imageUrls[specialtyName];
   };
@@ -68,7 +68,7 @@ const Home = () => {
       "General & Family": "👨‍⚕️",
       "Pediatrics": "👶",
       "ENT": "👂",
-      "Ophthalmology": "👁️"
+      "Dr Profile": "👩‍⚕️"
     };
     return fallbackIcons[specialtyName] || "🏥";
   };
