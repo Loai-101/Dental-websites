@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSEO } from '../../hooks/useSEO';
 import './Home.css';
 
 const Home = () => {
+  const navigate = useNavigate();
+  
   // SEO configuration
   useSEO({
     title: "PMI Medical Websites Showroom - Professional Clinic Website Design",
@@ -17,7 +20,6 @@ const Home = () => {
   });
 
   const [imageErrors, setImageErrors] = useState({});
-  const [videoError, setVideoError] = useState(false);
 
   const specialties = [
     { icon: "Tooth", en: "Dental", ar: "أسنان" },
@@ -34,15 +36,15 @@ const Home = () => {
     window.open(url, '_blank');
   };
 
+  const handlePMIITClick = () => {
+    navigate('/pmi-it');
+  };
+
   const handleImageError = (specialtyName) => {
     setImageErrors(prev => ({
       ...prev,
       [specialtyName]: true
     }));
-  };
-
-  const handleVideoError = () => {
-    setVideoError(true);
   };
 
   const getImageUrl = (specialtyName) => {
@@ -77,43 +79,17 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <div className="hero-video-background">
-          {!videoError ? (
-            <video 
-              className="hero-video-bg"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              disablePictureInPicture
-              controls={false}
-              onError={handleVideoError}
-            >
-              <source 
-                src="https://res.cloudinary.com/dvybb2xnc/video/upload/v1756122457/WhatsApp_Video_2025-08-25_at_14.47.20_b573fc15_cehood.mp4" 
-                type="video/mp4" 
-              />
-              <source 
-                src="https://res.cloudinary.com/dvybb2xnc/video/upload/v1756122457/WhatsApp_Video_2025-08-25_at_14.47.20_b573fc15_cehood.webm" 
-                type="video/webm" 
-              />
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <div className="hero-fallback-image">
-              <img 
-                src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg"
-                alt="Medical Website Background"
-                className="hero-bg-image"
-                decoding="async"
-              />
-            </div>
-          )}
-          <div className="hero-overlay"></div>
+          <div className="hero-fallback-image">
+            <img 
+              src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1761480259/WhatsApp_Image_2025-10-26_at_12.56.52_e95f2b38_znbq3s.jpg"
+              alt="Medical Website Background"
+              className="hero-bg-image"
+              decoding="async"
+            />
+          </div>
         </div>
         <div className="hero-content">
-          <h1 className="home-title">Welcome to PMI Medical websites Showroom</h1>
-          <p className="home-subtitle">Design your clinic website— in your way</p>
+          <h1 className="home-title">Welcome to PMI Detailing Aids</h1>
           <a 
             href="https://pmi-me.net/" 
             target="_blank" 
@@ -126,6 +102,60 @@ const Home = () => {
       </header>
       
       <main className="home-main">
+        <section className="pmi-divisions-section">
+          <div className="divisions-container">
+            <div className="division-card">
+              <div className="division-logo">
+                <img 
+                  src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_150,h_150,c_scale,q_auto/v1752659104/PMI_Purple_o6ml7r.ai"
+                  alt="PMI IT Logo"
+                  className="division-logo-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <h3 className="division-title">PMI IT</h3>
+              <button 
+                className="division-button division-button-purple"
+                onClick={handlePMIITClick}
+              >
+                View Detailing Aids
+              </button>
+            </div>
+            
+            <div className="division-card">
+              <div className="division-logo">
+                <img 
+                  src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_150,h_150,c_scale,q_auto/v1752659104/PMI_Blue_w7w1zn.ai"
+                  alt="PMI Medical Logo"
+                  className="division-logo-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <h3 className="division-title">PMI Medical</h3>
+              <button className="division-button division-button-blue">
+                View Detailing Aids
+              </button>
+            </div>
+            
+            <div className="division-card">
+              <div className="division-logo">
+                <img 
+                  src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_150,h_150,c_scale,q_auto/v1752659104/PMI_Brown_ooq0sv.ai"
+                  alt="PMI Advertising Logo"
+                  className="division-logo-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <h3 className="division-title">PMI Advertising</h3>
+              <button className="division-button division-button-orange">
+                View Detailing Aids
+              </button>
+            </div>
+          </div>
+        </section>
         <section className="specialties-section">
           <h2 className="specialties-title">Our Medical websites</h2>
           <div className="specialties-grid">

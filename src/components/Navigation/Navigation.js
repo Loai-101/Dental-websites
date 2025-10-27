@@ -15,7 +15,7 @@ const Navigation = () => {
         <div className="navigation-logo">
           <Link to="/" className="logo-link">
             <img 
-              src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_200,h_200,c_scale,q_auto/v1752659104/PMI_Purple_o6ml7r.ai" 
+              src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_200,h_200,c_scale,q_auto/v1751977454/PMI_Circile_Gray_wiu9mh.ai" 
               alt="PMI Logo" 
               className="logo-image"
               onLoad={(e) => {
@@ -37,7 +37,7 @@ const Navigation = () => {
             <div className="logo-fallback" style={{ display: 'flex' }}>
               <span className="logo-initials">PMI</span>
             </div>
-                         <h1 className="logo-text">Medical websites</h1>
+                         <h1 className="logo-text">Detailing Aids</h1>
           </Link>
         </div>
         
