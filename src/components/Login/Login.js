@@ -44,11 +44,19 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
+      <div className="login-background">
+        <img 
+          src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1761480259/WhatsApp_Image_2025-10-26_at_12.56.52_e95f2b38_znbq3s.jpg"
+          alt="Login Background"
+          className="login-bg-image"
+          decoding="async"
+        />
+      </div>
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
             <img 
-              src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_200,h_200,c_scale,q_auto/v1751976489/PMI_Circile_Purple_dypvtf.ai"
+              src="https://res.cloudinary.com/dvybb2xnc/image/upload/f_png,w_200,h_200,c_scale,q_auto/v1751977454/PMI_Circile_Gray_wiu9mh.ai"
               alt="PMI Logo"
               className="login-logo-image"
               onError={(e) => {
@@ -63,7 +71,7 @@ const Login = ({ onLogin }) => {
               <span className="login-logo-initials">PMI</span>
             </div>
           </div>
-          <h1 className="login-title">PMI Medical Websites Showroom</h1>
+          <h1 className="login-title">PMI Detailing Aids</h1>
           <p className="login-subtitle">Please sign in to continue</p>
         </div>
 

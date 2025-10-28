@@ -1,0 +1,266 @@
+/* PMI Medical - White cards with blue borders - Updated */
+
+.pmi-medical-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header Section */
+.pmi-medical-header {
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-image-background .hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.pmi-medical-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 2;
+}
+
+.header-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Main Content */
+.pmi-medical-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* Products Section */
+.products-section {
+  margin-bottom: 60px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pmi-medical-container .product-card {
+  background: white;
+  border-radius: 15px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+  border: 2px solid #3B82F6;
+  position: relative;
+  overflow: hidden;
+}
+
+.pmi-medical-container .product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3B82F6, #1D4ED8);
+  transition: all 0.3s ease;
+}
+
+.pmi-medical-container .product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+  border-color: #1D4ED8;
+}
+
+.product-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.pmi-medical-container .product-card:hover .product-logo {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.pmi-medical-container .product-logo-icon {
+  font-size: 4rem;
+  color: #3B82F6;
+  transition: color 0.3s ease;
+}
+
+.pmi-medical-container .product-card:hover .product-logo-icon {
+  color: #1D4ED8;
+}
+
+.pmi-medical-container .product-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3B82F6;
+  margin: 0 0 25px 0;
+  transition: color 0.3s ease;
+}
+
+.pmi-medical-container .product-card:hover .product-name {
+  color: #1D4ED8;
+}
+
+.product-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.product-button {
+  background: transparent;
+  border: 2px solid #e5e7eb;
+  color: #6b7280;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.pmi-medical-container .detailing-button {
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+
+.pmi-medical-container .detailing-button:hover {
+  background: #3B82F6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.demo-button {
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.demo-button:hover {
+  background: #10B981;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pmi-medical-header {
+    padding: 40px 20px;
+    min-height: 40vh;
+  }
+  
+  .page-title {
+    font-size: 2.2rem;
+  }
+  
+  .pmi-medical-main {
+    padding: 40px 20px;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 400px;
+  }
+  
+  .product-card {
+    padding: 30px 20px;
+  }
+  
+  .product-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .product-logo-icon {
+    font-size: 3rem;
+  }
+  
+  .product-name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pmi-medical-header {
+    min-height: 35vh;
+    padding: 30px 15px;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .product-card {
+    padding: 25px 15px;
+  }
+  
+  .product-buttons {
+    gap: 10px;
+  }
+  
+  .product-button {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}

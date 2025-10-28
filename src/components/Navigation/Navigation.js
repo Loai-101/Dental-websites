@@ -2,11 +2,17 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ onLogout }) => {
   const location = useLocation();
 
   const isActive = (path) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();
+    }
   };
 
   return (
@@ -85,6 +91,15 @@ const Navigation = () => {
             >
               FAQ
             </Link>
+          </li>
+          
+          <li className="navigation-item">
+            <button 
+              onClick={handleLogout}
+              className="navigation-link logout-button"
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </div>

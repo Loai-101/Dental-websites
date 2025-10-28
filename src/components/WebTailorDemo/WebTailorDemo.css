@@ -1,0 +1,227 @@
+/* WebTailor Demo Page Styles */
+
+.webtailor-demo-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Main Content */
+.webtailor-demo-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #8B5CF6;
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+}
+
+/* Specialties Section */
+.specialties-section {
+  margin-bottom: 60px;
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.specialty-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.specialty-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8B5CF6, #A855F7);
+  transition: all 0.3s ease;
+}
+
+.specialty-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+  border-color: #8B5CF6;
+}
+
+.specialty-logo-placeholder {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.specialty-card:hover .specialty-logo-placeholder {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.specialty-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.specialty-logo-fallback {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.fallback-icon {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.specialty-name-en {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #8B5CF6;
+  margin: 0 0 10px 0;
+  transition: color 0.3s ease;
+}
+
+.specialty-card:hover .specialty-name-en {
+  color: #7C3AED;
+}
+
+.specialty-name-ar {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0 0 25px 0;
+  font-weight: 500;
+}
+
+.visit-demo-button {
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.visit-demo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, #7C3AED, #9333EA);
+}
+
+.coming-soon-badge {
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .webtailor-demo-header {
+    padding: 60px 20px;
+  }
+  
+  .demo-title {
+    font-size: 2.5rem;
+  }
+  
+  .demo-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .webtailor-demo-main {
+    padding: 40px 20px;
+  }
+  
+  .specialties-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .specialty-card {
+    padding: 25px 20px;
+  }
+  
+  .specialty-logo-placeholder {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .specialty-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .specialty-logo-fallback {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .fallback-icon {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .webtailor-demo-header {
+    padding: 40px 15px;
+  }
+  
+  .demo-title {
+    font-size: 2rem;
+  }
+  
+  .demo-subtitle {
+    font-size: 1rem;
+  }
+  
+  .specialty-card {
+    padding: 20px 15px;
+  }
+  
+  .visit-demo-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
