@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSEO } from '../../hooks/useSEO';
 import Lottie from 'lottie-react';
 import OrderModal from '../OrderModal/OrderModal';
-import dashboardAnimation from '../../DashBoard.json/DashBoard.json';
 import websiteBuildingAnimation from '../../DashBoard.json/Website building lottie animation.json';
 import seoAnimation from '../../DashBoard.json/Seo isometric composition with human characters.json';
 import paymentAnimation from '../../DashBoard.json/payment.json';
