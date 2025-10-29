@@ -25,7 +25,6 @@ import PMIMedical from './components/PMIMedical/PMIMedical';
 import PMIAdvertising from './components/PMIAdvertising/PMIAdvertising';
 import WebTailorDemo from './components/WebTailorDemo/WebTailorDemo';
 import DetailingAids from './components/DetailingAids/DetailingAids';
-import MobileBottomNav from './components/MobileBottomNav/MobileBottomNav';
 
 // Component to handle redirect to login before refresh
 const RedirectHandler = ({ children, onLogout }) => {
@@ -114,7 +113,6 @@ function App() {
               <Route path="/detailing-aids/:department/:product" element={<DetailingAids />} />
             </Routes>
           </main>
-          <MobileBottomNav />
         </div>
       </RedirectHandler>
     </Router>
