@@ -15,6 +15,13 @@
   flex-direction: column;
 }
 
+/* Mobile bottom navigation spacing */
+@media (max-width: 768px) {
+  .App-main {
+    padding-bottom: 70px; /* Space for mobile bottom nav */
+  }
+}
+
 /* Reset default margins and padding */
 * {
   margin: 0;

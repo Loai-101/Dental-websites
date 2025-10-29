@@ -1,0 +1,190 @@
+/* Mobile Bottom Navigation Styles */
+
+.mobile-bottom-nav {
+  display: none; /* Hidden by default, shown only on mobile */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #4B5BA5 0%, #7B9ACF 33%, #D4B5C8 66%, #8B7B6B 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 12px;
+  min-width: 60px;
+  position: relative;
+}
+
+.mobile-nav-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.mobile-nav-item-active {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.mobile-nav-item-active::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.mobile-nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav-item:hover .mobile-nav-icon,
+.mobile-nav-item-active .mobile-nav-icon {
+  transform: scale(1.1);
+}
+
+.mobile-nav-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Show mobile bottom nav only on mobile devices */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: block;
+  }
+  
+  /* Add bottom padding to main content to prevent overlap */
+  .App-main {
+    padding-bottom: 70px;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+}
+
+/* Mobile landscape adjustments */
+@media (max-width: 640px) {
+  .mobile-nav-container {
+    padding: 6px 0;
+  }
+  
+  .mobile-nav-item {
+    padding: 6px 8px;
+    min-width: 50px;
+  }
+  
+  .mobile-nav-icon {
+    font-size: 18px;
+  }
+  
+  .mobile-nav-label {
+    font-size: 9px;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  .mobile-nav-container {
+    padding: 5px 0;
+  }
+  
+  .mobile-nav-item {
+    padding: 5px 6px;
+    min-width: 45px;
+  }
+  
+  .mobile-nav-icon {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+  
+  .mobile-nav-label {
+    font-size: 8px;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 360px) {
+  .mobile-nav-container {
+    padding: 4px 0;
+  }
+  
+  .mobile-nav-item {
+    padding: 4px 5px;
+    min-width: 40px;
+  }
+  
+  .mobile-nav-icon {
+    font-size: 14px;
+  }
+  
+  .mobile-nav-label {
+    font-size: 7px;
+  }
+}
+
+/* Animation for smooth appearance */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mobile-bottom-nav {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Hover effects for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-nav-item:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mobile-nav-item:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
