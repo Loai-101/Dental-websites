@@ -791,45 +791,64 @@
 }
 
 /* Responsive design for smaller screens */
-@media (max-width: 1200px) {
+
+/* Tablet Landscape (1024px and below) */
+@media (max-width: 1024px) {
+  .home-header {
+    padding: 60px 20px;
+    min-height: 50vh;
+  }
+  
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.2rem;
+  }
+  
   .specialties-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
   }
-}
-
-@media (max-width: 900px) {
-  .specialties-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  
+  .division-card {
+    padding: 30px 20px;
+  }
+  
+  .division-title {
+    font-size: 1.3rem;
+  }
+  
+  .division-description {
+    font-size: 0.9rem;
   }
 }
 
-               @media (max-width: 768px) {
-       .home-header {
-         min-height: 50vh;
-         padding: 60px 20px;
-       }
-      
-      .hero-video-bg {
-        animation: videoZoom 15s ease-in-out infinite alternate;
-      }
-    
-    .home-title {
-      font-size: 2rem;
-    }
-    
-    .home-subtitle {
-      font-size: 1.1rem;
-    }
-   
-   .specialties-title {
-     font-size: 2.2rem;
-   }
+/* Tablet Portrait (768px and below) */
+@media (max-width: 768px) {
+  .home-header {
+    min-height: 45vh;
+    padding: 50px 20px;
+  }
+  
+  .home-title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .home-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
   
   .specialties-section {
-    padding: 50px 20px;
-    border-radius: 15px;
+    padding: 40px 20px;
+  }
+  
+  .specialties-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
   }
   
   .specialties-grid {
@@ -838,68 +857,180 @@
   }
   
   .specialty-card {
-    padding: 30px 20px;
-    border-radius: 15px;
+    padding: 25px 20px;
   }
   
   .specialty-logo-placeholder {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
   }
   
   .specialty-name-en {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .specialty-name-ar {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+  
+  .pmi-divisions-section {
+    padding: 40px 20px;
+  }
+  
+  .divisions-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .divisions-container {
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .division-card {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 25px 20px;
+  }
+  
+  .division-logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .division-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .division-description {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+  
+  .division-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Landscape (640px and below) */
+@media (max-width: 640px) {
+  .home-header {
+    min-height: 40vh;
+    padding: 40px 15px;
+  }
+  
+  .home-title {
+    font-size: 1.8rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1rem;
+  }
+  
   .specialties-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
   
   .specialty-card {
-    padding: 25px 15px;
+    padding: 20px 15px;
   }
   
   .specialty-logo-placeholder {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
-}
-
-/* Responsive design for PMI Divisions */
-@media (max-width: 900px) {
+  
   .divisions-container {
-    flex-direction: column;
-    max-width: 400px;
+    max-width: 100%;
   }
   
   .division-card {
-    width: 100%;
+    padding: 20px 15px;
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile Portrait (480px and below) */
+@media (max-width: 480px) {
+  .home-header {
+    min-height: 35vh;
+    padding: 30px 10px;
+  }
+  
+  .home-title {
+    font-size: 1.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .specialties-section {
+    padding: 30px 15px;
+  }
+  
+  .specialties-title {
+    font-size: 1.8rem;
+  }
+  
+  .specialty-card {
+    padding: 15px 10px;
+  }
+  
+  .specialty-logo-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .specialty-name-en {
+    font-size: 1rem;
+  }
+  
+  .specialty-name-ar {
+    font-size: 0.9rem;
+  }
+  
   .pmi-divisions-section {
-    padding: 40px 20px;
+    padding: 30px 15px;
+  }
+  
+  .divisions-title {
+    font-size: 1.8rem;
   }
   
   .division-card {
-    padding: 30px 20px;
+    padding: 15px 10px;
   }
   
   .division-logo {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
   }
   
   .division-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+  
+  .division-description {
+    font-size: 0.8rem;
+  }
+  
+  .division-button {
+    padding: 8px 16px;
+    font-size: 0.8rem;
   }
 }
+
+/* Large Desktop (1200px and above) - Keep original styles */
+@media (min-width: 1201px) {
+  .specialties-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+}
+
