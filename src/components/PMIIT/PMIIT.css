@@ -195,9 +195,9 @@
 
   .social-icon,
   .order-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
   }
   
   .pmi-it-main {
@@ -274,7 +274,7 @@
 
 @media (max-width: 480px) {
   .pmi-it-header {
-    min-height: 45vh;
+    min-height: 60vh;
     padding: 25px 10px;
   }
   
@@ -288,13 +288,14 @@
   
   .social-icons {
     gap: 15px;
+    bottom: 50px;
   }
 
   .social-icon,
   .order-icon {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
   }
   
   .pmi-it-main {
@@ -318,7 +319,7 @@
 /* Extra Small Mobile (360px and below) */
 @media (max-width: 360px) {
   .pmi-it-header {
-    min-height: 40vh;
+    min-height: 55vh;
     padding: 20px 8px;
   }
   
@@ -332,13 +333,14 @@
   
   .social-icons {
     gap: 12px;
+    bottom: 40px;
   }
 
   .social-icon,
   .order-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
   }
   
   .pmi-it-main {
@@ -356,6 +358,25 @@
   .product-button {
     padding: 4px 8px;
     font-size: 0.7rem;
+  }
+}
+
+/* Extra extra small screens */
+@media (max-width: 320px) {
+  .pmi-it-header {
+    min-height: 50vh;
+  }
+  
+  .social-icons {
+    bottom: 30px;
+    gap: 8px;
+  }
+
+  .social-icon,
+  .order-icon {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
   }
 }
 
@@ -525,73 +546,4 @@
   }
 }
 
-@media (max-width: 768px) {
-  .pmi-it-header {
-    padding: 40px 20px;
-    min-height: 40vh;
-  }
-  
-  .pmi-it-container .page-title {
-    font-size: 2.2rem;
-  }
-  
-  .page-subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .pmi-it-main {
-    padding: 40px 20px;
-  }
-  
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 400px;
-  }
-  
-  .product-card {
-    padding: 30px 20px;
-  }
-  
-  .product-logo {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .product-logo-icon {
-    font-size: 3rem;
-  }
-  
-  .product-lottie-animation {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .product-name {
-    font-size: 1.2rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .pmi-it-header {
-    min-height: 35vh;
-    padding: 30px 15px;
-  }
-  
-  .pmi-it-container .page-title {
-    font-size: 1.8rem;
-  }
-  
-  .product-card {
-    padding: 25px 15px;
-  }
-  
-  .product-buttons {
-    gap: 10px;
-  }
-  
-  .product-button {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-  }
-}
