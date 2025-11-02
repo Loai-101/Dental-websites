@@ -23,6 +23,7 @@ const OrderModal = ({ onClose, department }) => {
     paymentMethod: '',
     advancePayment: '',
     salesmanName: '',
+    orderStatus: 'normal',
     description: ''
   });
 
@@ -126,6 +127,9 @@ const OrderModal = ({ onClose, department }) => {
       // Sales Information
       formDataToSend.append('salesman_name', formData.salesmanName);
       
+      // Order Status
+      formDataToSend.append('order_status', formData.orderStatus || 'normal');
+      
       // Description
       formDataToSend.append('description', formData.description || 'No additional description provided');
       
@@ -171,6 +175,7 @@ const OrderModal = ({ onClose, department }) => {
           paymentMethod: '',
           advancePayment: '',
           salesmanName: '',
+          orderStatus: 'normal',
           description: ''
         });
 
@@ -513,6 +518,23 @@ const OrderModal = ({ onClose, department }) => {
               <option value="">Select salesman</option>
               <option value="Dr Ahmed">Dr Ahmed</option>
               <option value="Eng Jahan">Eng Jahan</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="orderStatus">Order Status *</label>
+            <select
+              id="orderStatus"
+              name="orderStatus"
+              value={formData.orderStatus}
+              onChange={handleInputChange}
+              required
+              className={`order-status-select status-${formData.orderStatus}`}
+            >
+              <option value="normal">Normal</option>
+              <option value="urgent">Urgent</option>
+              <option value="high-priority">High Priority</option>
+              <option value="low-priority">Low Priority</option>
             </select>
           </div>
 

@@ -17,11 +17,15 @@ import verificationAnimation from '../../DashBoard.json/verification.json';
 import animalCareAnimation from '../../DashBoard.json/Animal care Loading.json';
 import doctorAnimation from '../../DashBoard.json/Doctor.json';
 import loadingTextAnimation from '../../DashBoard.json/Loading text.json';
+import dynamicCubeLineAnimation from '../../DashBoard.json/Dynamic Cube Line.json';
+import containerShipAnimation from '../../DashBoard.json/Container_Ship.json';
 import './PMIIT.css';
 
 const PMIIT = () => {
   const navigate = useNavigate();
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [showFlowPayModal, setShowFlowPayModal] = useState(false);
+  const [showWebTailorModal, setShowWebTailorModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const backgroundRef = useRef(null);
@@ -192,40 +196,120 @@ const PMIIT = () => {
   const itProducts = [
     { name: "WebTailor", logo: "lottie", animation: websiteBuildingAnimation },
     { name: "FlexSite", logo: "lottie", animation: seoAnimation },
-    { name: "FlowPay ST", logo: "lottie", animation: paymentAnimation },
-    { name: "FlowPay AD", logo: "lottie", animation: onlinePaymentsAnimation },
-    { name: "FlowPay PRO", logo: "lottie", animation: businessAnalysisAnimation },
+    { name: "FlowPay", logo: "lottie", animation: paymentAnimation },
     { name: "WorkFlow", logo: "lottie", animation: wheelRotationAnimation },
     { name: "MonoMarket", logo: "lottie", animation: shoppingCartAnimation },
     { name: "EstateLink", logo: "lottie", animation: homeAnimation },
     { name: "WorkHub for Companies", logo: "lottie", animation: companyFormAnimation },
     { name: "InfoEdge", logo: "lottie", animation: verificationAnimation },
     { name: "VetCare", logo: "lottie", animation: animalCareAnimation },
-    { name: "CureLink", logo: "lottie", animation: doctorAnimation }
+    { name: "CureLink", logo: "lottie", animation: doctorAnimation },
+    { name: "LineMaster", logo: "lottie", animation: dynamicCubeLineAnimation },
+    { name: "MarinaFlow", logo: "lottie", animation: containerShipAnimation }
+  ];
+
+  // FlowPay sub-products
+  const flowPayProducts = [
+    { name: "FlowPay ST", animation: paymentAnimation, demoUrl: 'https://posbasic.pmi-it-solutions.com/web/login' },
+    { name: "FlowPay AD", animation: onlinePaymentsAnimation, demoUrl: 'https://posadvanced.pmi-it-solutions.com/web/login' },
+    { name: "FlowPay PRO", animation: businessAnalysisAnimation, demoUrl: 'https://pospro.pmi-it-solutions.com/web/login' }
+  ];
+
+  // WebTailor specialties
+  const [webTailorImageErrors, setWebTailorImageErrors] = useState({});
+
+  const getWebTailorImageUrl = (specialtyName) => {
+    const imageUrls = {
+      "Dental": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756120260/istockphoto-912441172-612x612_mqdclv.jpg",
+      "Vet Clinic": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1757501000/2105138_xr0c1a.png",
+      "Physiotherapy": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119405/physiotherapy-icon-vector-image-can-be-used-nursing_120816-92690_csrvix.png",
+      "Cardiology": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116278/387577_ixnm8c.png",
+      "General & Family": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756116279/family-icon-2316421_1280_fot0td.webp",
+      "Pediatrics": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119639/pediatrics-icon_pnefev.png",
+      "ENT": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1756119628/images_h2upzi.png",
+      "Dr Profile": "https://res.cloudinary.com/dvybb2xnc/image/upload/v1758008787/female-portrait-medical-doctor-profile-flat-design-free-vector_mv3xdy.jpg"
+    };
+    return imageUrls[specialtyName];
+  };
+
+  const getWebTailorFallbackIcon = (specialtyName) => {
+    const fallbackIcons = {
+      "Dental": "🦷",
+      "Vet Clinic": "🐾",
+      "Physiotherapy": "💪",
+      "Cardiology": "❤️",
+      "General & Family": "👨‍⚕️",
+      "Pediatrics": "👶",
+      "ENT": "👂",
+      "Dr Profile": "👩‍⚕️"
+    };
+    return fallbackIcons[specialtyName] || "🏥";
+  };
+
+  const handleWebTailorImageError = (specialtyName) => {
+    setWebTailorImageErrors(prev => ({
+      ...prev,
+      [specialtyName]: true
+    }));
+  };
+
+  const webTailorSpecialties = [
+    { name: "Dental", nameAr: "أسنان", demoUrl: 'https://dental-sqm1.vercel.app' },
+    { name: "Vet Clinic", nameAr: "عيادة بيطرية", demoUrl: 'https://vet-website-five.vercel.app/' },
+    { name: "Physiotherapy", nameAr: "علاج طبيعي", demoUrl: 'https://physiotherapy-clinic-website.vercel.app/' },
+    { name: "Cardiology", nameAr: "أمراض القلب", demoUrl: 'https://cardiology-website-mu.vercel.app/' },
+    { name: "General & Family", nameAr: "طب عام و عائلة", demoUrl: 'https://general-family.vercel.app/' },
+    { name: "Pediatrics", nameAr: "أطفال", demoUrl: 'https://pediatrics-website.vercel.app/' },
+    { name: "ENT", nameAr: "أنف و أذن و حنجرة", demoUrl: 'https://ent-website-tau.vercel.app/' },
+    { name: "Dr Profile", nameAr: "عيون", demoUrl: 'https://dr-profile-nine.vercel.app/' }
+  ];
+
+  // Moving bar animations for card backgrounds
+  const movingBarAnimations = [
+    websiteBuildingAnimation,
+    companyFormAnimation,
+    verificationAnimation,
+    seoAnimation,
+    shoppingCartAnimation
   ];
 
   const handleDetailingAids = (productName) => {
+    // If FlowPay, open modal (same as demo)
+    if (productName === "FlowPay") {
+      setShowFlowPayModal(true);
+      return;
+    }
+    
+    // Only WebTailor has a link for now - others will be empty until links are provided
     if (productName === "WebTailor") {
       window.open('https://drive.google.com/file/d/1fhv8QN33UYoY_DCHbuE_QPjWZ-N98LUe/view?usp=drive_link', '_blank');
-    } else {
-      // Navigate to detailing aids page for the product
-      navigate(`/detailing-aids/PMI IT/${productName}`);
     }
+    // Other products - buttons are empty/disabled until links are provided
   };
 
   const handleDemo = (productName) => {
+    // If FlowPay, open modal instead of direct navigation
+    if (productName === "FlowPay") {
+      setShowFlowPayModal(true);
+      return;
+    }
+
+    // If WebTailor, open modal with specialties
+    if (productName === "WebTailor") {
+      setShowWebTailorModal(true);
+      return;
+    }
+
     // Demo URLs mapping
     const demoUrls = {
-      "WebTailor": '/webtailor-demo',
-      "FlowPay ST": 'https://posbasic.pmi-it-solutions.com/web/login',
-      "FlowPay AD": 'https://posadvanced.pmi-it-solutions.com/web/login',
-      "FlowPay PRO": 'https://pospro.pmi-it-solutions.com/web/login',
       "WorkFlow": 'https://garage.pmi-it-solutions.com/web/web/login',
       "MonoMarket": 'https://health.care.pmi-me.net/web/login',
       "EstateLink": 'https://realstate.pmi-it-solutions.com/web/login',
+      "WorkHub for Companies": 'https://erp.pmi-it-solutions.com/web/login',
       "InfoEdge": 'https://dashboard.pmi-it-solutions.com/web/login',
       "VetCare": 'https://vet.pmi-it-solutions.com/web/login',
-      "CureLink": 'https://hms.pmi-it-solutions.com/web/login'
+      "CureLink": 'https://hms.pmi-it-solutions.com/web/login',
+      "LineMaster": 'https://industry.pmi-it-solutions.com/web/login'
     };
 
     const demoUrl = demoUrls[productName];
@@ -241,6 +325,10 @@ const PMIIT = () => {
     } else {
       console.log(`No demo URL found for ${productName}`);
     }
+  };
+
+  const handleFlowPaySubDemo = (demoUrl) => {
+    window.open(demoUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -284,7 +372,7 @@ const PMIIT = () => {
               }}
             >
               <img 
-                src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1762064431/Screenshot_2025-11-02_092017_biizor.png"
+                src="https://res.cloudinary.com/dvybb2xnc/image/upload/v1762074661/Screenshot_2025-11-02_121052_qntsu8.png"
                 alt="Background Pattern"
                 className="background-image"
                 style={{ 
@@ -457,6 +545,19 @@ const PMIIT = () => {
           <div className="products-grid">
             {itProducts.map((product, index) => (
               <div key={index} className="product-card">
+                {/* Background animations like moving bar */}
+                <div className="product-card-background-animations">
+                  {movingBarAnimations.map((anim, animIndex) => (
+                    <div key={animIndex} className="product-card-bg-animation">
+                      <Lottie 
+                        animationData={anim}
+                        loop={true}
+                        autoplay={true}
+                        className="product-card-lottie-bg"
+                      />
+                    </div>
+                  ))}
+                </div>
                 <div className="product-logo">
                   {product.logo === "lottie" ? (
                     <Lottie 
@@ -472,8 +573,9 @@ const PMIIT = () => {
                 <h3 className="product-name">{product.name}</h3>
                 <div className="product-buttons">
                   <button 
-                    className="product-button detailing-button"
+                    className={`product-button detailing-button ${(product.name !== "WebTailor" && product.name !== "FlowPay") ? 'disabled' : ''}`}
                     onClick={() => handleDetailingAids(product.name)}
+                    disabled={product.name !== "WebTailor" && product.name !== "FlowPay"}
                   >
                     Detailing Aids
                   </button>
@@ -500,6 +602,104 @@ const PMIIT = () => {
         }}
         department="PMI IT"
       />,
+      document.body
+    ) : null}
+
+    {/* FlowPay Modal */}
+    {showFlowPayModal && typeof document !== 'undefined' ? createPortal(
+      <div className="flowpay-modal-overlay" onClick={() => setShowFlowPayModal(false)}>
+        <div className="flowpay-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="flowpay-modal-header">
+            <h2>FlowPay Products</h2>
+            <button 
+              className="flowpay-modal-close"
+              onClick={() => setShowFlowPayModal(false)}
+              aria-label="Close modal"
+            >
+              ×
+            </button>
+          </div>
+          <div className="flowpay-modal-products">
+            {flowPayProducts.map((product, index) => (
+              <div key={index} className="flowpay-product-card">
+                <div className="flowpay-product-logo">
+                  <Lottie 
+                    animationData={product.animation}
+                    className="flowpay-product-lottie"
+                    loop={true}
+                    autoplay={true}
+                  />
+                </div>
+                <h3 className="flowpay-product-name">{product.name}</h3>
+                <div className="flowpay-product-buttons">
+                  <button 
+                    className="flowpay-product-button demo-button"
+                    onClick={() => handleFlowPaySubDemo(product.demoUrl)}
+                  >
+                    Demo
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>,
+      document.body
+    ) : null}
+
+    {/* WebTailor Modal */}
+    {showWebTailorModal && typeof document !== 'undefined' ? createPortal(
+      <div className="webtailor-modal-overlay" onClick={() => setShowWebTailorModal(false)}>
+        <div className="webtailor-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="webtailor-modal-header">
+            <h2>WebTailor Specialties</h2>
+            <button 
+              className="webtailor-modal-close"
+              onClick={() => setShowWebTailorModal(false)}
+              aria-label="Close modal"
+            >
+              ×
+            </button>
+          </div>
+          <div className="webtailor-modal-specialties">
+            {webTailorSpecialties.map((specialty, index) => (
+              <div key={index} className="webtailor-specialty-card">
+                <div className="webtailor-specialty-logo">
+                  {!webTailorImageErrors[specialty.name] ? (
+                    <img 
+                      src={getWebTailorImageUrl(specialty.name)}
+                      alt={`${specialty.name} Logo`}
+                      className="webtailor-specialty-image"
+                      onError={() => handleWebTailorImageError(specialty.name)}
+                      loading="lazy"
+                      decoding="async"
+                      width="100"
+                      height="100"
+                    />
+                  ) : (
+                    <div className="webtailor-specialty-fallback">
+                      <span className="webtailor-fallback-icon">{getWebTailorFallbackIcon(specialty.name)}</span>
+                    </div>
+                  )}
+                </div>
+                <h3 className="webtailor-specialty-name">{specialty.name}</h3>
+                <p className="webtailor-specialty-name-ar">{specialty.nameAr}</p>
+                <button 
+                  className="webtailor-specialty-button demo-button"
+                  onClick={() => {
+                    if (specialty.demoUrl && specialty.demoUrl !== '#') {
+                      window.open(specialty.demoUrl, '_blank', 'noopener,noreferrer');
+                    }
+                  }}
+                  disabled={!specialty.demoUrl || specialty.demoUrl === '#'}
+                >
+                  Visit Demo
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>,
       document.body
     ) : null}
     </React.Fragment>

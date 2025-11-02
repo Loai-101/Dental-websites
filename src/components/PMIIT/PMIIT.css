@@ -758,7 +758,7 @@
 .background-image {
   width: 100% !important;
   height: 100% !important;
-  opacity: 0.2;
+  opacity: 0.6;
   object-fit: cover;
   margin: 0 !important;
   padding: 0 !important;
@@ -791,10 +791,6 @@
 /* PMI IT - White cards with purple borders - Updated */
 .pmi-it-container .product-card {
   background: white;
-  background-image: url('https://res.cloudinary.com/dvybb2xnc/image/upload/v1762064431/Screenshot_2025-11-02_092017_biizor.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 15px;
   padding: 40px 30px;
   text-align: center;
@@ -803,6 +799,34 @@
   border: 2px solid #8B5CF6;
   position: relative;
   overflow: hidden;
+}
+
+/* Background animations container for product cards */
+.product-card-background-animations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0.3;
+  overflow: hidden;
+}
+
+.product-card-bg-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.product-card-lottie-bg {
+  width: 60px;
+  height: 60px;
 }
 
 /* Overlay for better text readability */
@@ -814,7 +838,7 @@
   right: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.85);
-  z-index: 0;
+  z-index: 1;
   border-radius: 15px;
 }
 
@@ -927,10 +951,10 @@
   }
 }
 
-/* Ensure card content appears above overlay */
-.pmi-it-container .product-card > * {
+/* Ensure card content appears above overlay and animations */
+.pmi-it-container .product-card > *:not(.product-card-background-animations) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .pmi-it-container .product-card::before {
@@ -1028,11 +1052,26 @@
   color: #8B5CF6;
 }
 
-.pmi-it-container .detailing-button:hover {
+.pmi-it-container .detailing-button:hover:not(.disabled):not(:disabled) {
   background: #8B5CF6;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.pmi-it-container .detailing-button.disabled,
+.pmi-it-container .detailing-button:disabled {
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pmi-it-container .detailing-button.disabled:hover,
+.pmi-it-container .detailing-button:disabled:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
 }
 
 .demo-button {
@@ -1052,6 +1091,464 @@
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
+  }
+}
+
+/* FlowPay Modal Styles */
+.flowpay-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  backdrop-filter: blur(5px);
+  animation: fadeInOverlay 0.3s ease-in;
+}
+
+.flowpay-modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.flowpay-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #8B5CF6;
+}
+
+.flowpay-modal-header h2 {
+  font-size: 2rem;
+  color: #8B5CF6;
+  margin: 0;
+  font-weight: 700;
+}
+
+.flowpay-modal-close {
+  background: transparent;
+  border: 2px solid #8B5CF6;
+  color: #8B5CF6;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.flowpay-modal-close:hover {
+  background: #8B5CF6;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.flowpay-modal-products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.flowpay-product-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+  border: 2px solid #8B5CF6;
+  position: relative;
+  overflow: hidden;
+}
+
+.flowpay-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
+}
+
+.flowpay-product-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flowpay-product-lottie {
+  width: 80px;
+  height: 80px;
+}
+
+.flowpay-product-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #8B5CF6;
+  margin: 0 0 20px 0;
+}
+
+.flowpay-product-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flowpay-product-button {
+  background: transparent;
+  border: 2px solid #e5e7eb;
+  color: #6b7280;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.flowpay-product-button.detailing-button {
+  border-color: #8B5CF6;
+  color: #8B5CF6;
+}
+
+.flowpay-product-button.detailing-button:hover:not(.disabled):not(:disabled) {
+  background: #8B5CF6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.flowpay-product-button.detailing-button.disabled,
+.flowpay-product-button.detailing-button:disabled {
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.flowpay-product-button.detailing-button.disabled:hover,
+.flowpay-product-button.detailing-button:disabled:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.flowpay-product-button.demo-button {
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.flowpay-product-button.demo-button:hover {
+  background: #10B981;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Responsive FlowPay Modal */
+@media (max-width: 768px) {
+  .flowpay-modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .flowpay-modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .flowpay-modal-products {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .flowpay-product-card {
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flowpay-modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .flowpay-product-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .flowpay-product-lottie {
+    width: 60px;
+    height: 60px;
+  }
+
+  .flowpay-product-name {
+    font-size: 1rem;
+  }
+}
+
+/* WebTailor Modal Styles */
+.webtailor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  backdrop-filter: blur(5px);
+  animation: fadeInOverlay 0.3s ease-in;
+}
+
+.webtailor-modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 1100px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+.webtailor-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #8B5CF6;
+}
+
+.webtailor-modal-header h2 {
+  font-size: 2rem;
+  color: #8B5CF6;
+  margin: 0;
+  font-weight: 700;
+}
+
+.webtailor-modal-close {
+  background: transparent;
+  border: 2px solid #8B5CF6;
+  color: #8B5CF6;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.webtailor-modal-close:hover {
+  background: #8B5CF6;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.webtailor-modal-specialties {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.webtailor-specialty-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+  border: 2px solid #8B5CF6;
+  position: relative;
+  overflow: hidden;
+}
+
+.webtailor-specialty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
+}
+
+.webtailor-specialty-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.webtailor-specialty-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.webtailor-specialty-fallback {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  border-radius: 50%;
+}
+
+.webtailor-fallback-icon {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.webtailor-specialty-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #8B5CF6;
+  margin: 0 0 8px 0;
+}
+
+.webtailor-specialty-name-ar {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 20px 0;
+  direction: rtl;
+  font-family: 'Arial', 'Arabic Typesetting', sans-serif;
+}
+
+.webtailor-specialty-button {
+  background: transparent;
+  border: 2px solid #10B981;
+  color: #10B981;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.webtailor-specialty-button:hover:not(:disabled) {
+  background: #10B981;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.webtailor-specialty-button:disabled {
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.webtailor-specialty-button:disabled:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive WebTailor Modal */
+@media (max-width: 1024px) {
+  .webtailor-modal-specialties {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .webtailor-modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .webtailor-modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .webtailor-modal-specialties {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .webtailor-specialty-card {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .webtailor-modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .webtailor-modal-specialties {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .webtailor-specialty-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .webtailor-specialty-image,
+  .webtailor-specialty-fallback {
+    width: 60px;
+    height: 60px;
+  }
+
+  .webtailor-fallback-icon {
+    font-size: 2rem;
+  }
+
+  .webtailor-specialty-name {
+    font-size: 1rem;
+  }
+
+  .webtailor-specialty-name-ar {
+    font-size: 0.9rem;
   }
 }
 
