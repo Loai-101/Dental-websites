@@ -138,7 +138,7 @@ const OrderModal = ({ onClose, department }) => {
       formDataToSend.append('_template', 'table');
 
       // Send to FormSubmit
-      const response = await fetch('https://formsubmit.co/q9g8moh@gmail.com', {
+      const response = await fetch('https://formsubmit.co/pmiteam@pmi-me.net', {
         method: 'POST',
         body: formDataToSend,
         headers: {
@@ -552,7 +552,7 @@ const OrderModal = ({ onClose, department }) => {
                 className="success-animation"
               />
               <p className="success-animation-text">
-                Order submitted successfully! Email sent to q9g8moh@gmail.com
+                Order submitted successfully! Email sent to pmiteam@pmi-me.net
               </p>
             </div>
           )}
@@ -560,7 +560,7 @@ const OrderModal = ({ onClose, department }) => {
           {submitStatus === 'success' && !showSuccessAnimation && (
             <div className="success-message">
               <span className="status-icon">✓</span>
-              Order submitted successfully! Email sent to q9g8moh@gmail.com
+              Order submitted successfully! Email sent to pmiteam@pmi-me.net
             </div>
           )}
 
