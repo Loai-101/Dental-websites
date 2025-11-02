@@ -135,6 +135,9 @@ const PMIIT = () => {
 
   // Calculate number of animations needed and update background height to match page content
   useEffect(() => {
+    let rafId = null;
+    let timeoutId = null;
+    
     const updateBackgroundHeight = () => {
       if (containerRef.current && backgroundRef.current) {
         const containerHeight = containerRef.current.scrollHeight;
@@ -153,16 +156,32 @@ const PMIIT = () => {
       }
     };
 
-    // Small delay to ensure DOM is fully rendered
-    const timeoutId = setTimeout(updateBackgroundHeight, 100);
+    // Throttled update using requestAnimationFrame
+    const throttledUpdate = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      rafId = requestAnimationFrame(updateBackgroundHeight);
+    };
+
+    // Debounced resize handler
+    const handleResize = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(updateBackgroundHeight, 150);
+    };
     
-    // Update on mount and resize
-    updateBackgroundHeight();
-    window.addEventListener('resize', updateBackgroundHeight);
-    window.addEventListener('scroll', updateBackgroundHeight);
+    // Initial update
+    const initialTimeout = setTimeout(updateBackgroundHeight, 100);
     
-    // Use MutationObserver to watch for content changes
-    const observer = new MutationObserver(updateBackgroundHeight);
+    // Update on mount and resize (debounced)
+    window.addEventListener('resize', handleResize, { passive: true });
+    
+    // Use MutationObserver with throttling
+    const observer = new MutationObserver(() => {
+      throttledUpdate();
+    });
     if (containerRef.current) {
       observer.observe(containerRef.current, {
         childList: true,
@@ -173,9 +192,12 @@ const PMIIT = () => {
     }
 
     return () => {
+      clearTimeout(initialTimeout);
       clearTimeout(timeoutId);
-      window.removeEventListener('resize', updateBackgroundHeight);
-      window.removeEventListener('scroll', updateBackgroundHeight);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('resize', handleResize);
       observer.disconnect();
     };
   }, []);
@@ -406,8 +428,8 @@ const PMIIT = () => {
         {/* Moving Bar Background */}
         <div className="moving-bar-container">
           <div className="moving-bar-content">
-            {/* Multiple sets for infinite seamless scrolling - 6 sets for smooth continuity */}
-            {[...Array(6)].map((_, setIndex) => (
+            {/* Multiple sets for infinite seamless scrolling - 3 sets for smooth continuity (reduced for performance) */}
+            {[...Array(3)].map((_, setIndex) => (
               <React.Fragment key={setIndex}>
                 <div className="moving-bar-icon">
                   <Lottie 
@@ -415,6 +437,9 @@ const PMIIT = () => {
                     loop={true}
                     autoplay={true}
                     className="moving-bar-lottie"
+                    rendererSettings={{
+                      preserveAspectRatio: 'xMidYMid slice'
+                    }}
                   />
                 </div>
                 <div className="moving-bar-icon">
@@ -423,6 +448,9 @@ const PMIIT = () => {
                     loop={true}
                     autoplay={true}
                     className="moving-bar-lottie"
+                    rendererSettings={{
+                      preserveAspectRatio: 'xMidYMid slice'
+                    }}
                   />
                 </div>
                 <div className="moving-bar-icon">
@@ -431,6 +459,9 @@ const PMIIT = () => {
                     loop={true}
                     autoplay={true}
                     className="moving-bar-lottie"
+                    rendererSettings={{
+                      preserveAspectRatio: 'xMidYMid slice'
+                    }}
                   />
                 </div>
                 <div className="moving-bar-icon">
@@ -439,6 +470,9 @@ const PMIIT = () => {
                     loop={true}
                     autoplay={true}
                     className="moving-bar-lottie"
+                    rendererSettings={{
+                      preserveAspectRatio: 'xMidYMid slice'
+                    }}
                   />
                 </div>
                 <div className="moving-bar-icon">
@@ -447,6 +481,9 @@ const PMIIT = () => {
                     loop={true}
                     autoplay={true}
                     className="moving-bar-lottie"
+                    rendererSettings={{
+                      preserveAspectRatio: 'xMidYMid slice'
+                    }}
                   />
                 </div>
               </React.Fragment>
@@ -545,19 +582,6 @@ const PMIIT = () => {
           <div className="products-grid">
             {itProducts.map((product, index) => (
               <div key={index} className="product-card">
-                {/* Background animations like moving bar */}
-                <div className="product-card-background-animations">
-                  {movingBarAnimations.map((anim, animIndex) => (
-                    <div key={animIndex} className="product-card-bg-animation">
-                      <Lottie 
-                        animationData={anim}
-                        loop={true}
-                        autoplay={true}
-                        className="product-card-lottie-bg"
-                      />
-                    </div>
-                  ))}
-                </div>
                 <div className="product-logo">
                   {product.logo === "lottie" ? (
                     <Lottie 

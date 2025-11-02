@@ -25,8 +25,9 @@
   align-items: center;
   justify-content: center;
   z-index: 999999 !important;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter removed for performance */
   animation: fadeInOverlay 0.3s ease-in;
+  transform: translateZ(0);
 }
 
 .pmi-it-loading-overlay.fade-out {
@@ -770,6 +771,9 @@
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
+  transform: translateZ(0);
+  will-change: opacity;
+  backface-visibility: hidden;
 }
 
 /* Products Section */
@@ -778,6 +782,8 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .products-grid {
@@ -786,6 +792,7 @@
   gap: 30px;
   max-width: 1000px;
   margin: 0 auto;
+  contain: layout style paint;
 }
 
 /* PMI IT - White cards with purple borders - Updated */
@@ -795,10 +802,12 @@
   padding: 40px 30px;
   text-align: center;
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border: 2px solid #8B5CF6;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Background animations container for product cards */
@@ -855,6 +864,8 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 .moving-bar-content {
@@ -864,14 +875,17 @@
   white-space: nowrap;
   animation: scrollBar 60s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 @keyframes scrollBar {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-33.333333%);
+    transform: translate3d(-33.333333%, 0, 0);
   }
 }
 
@@ -886,8 +900,11 @@
   border-radius: 50%;
   color: #8B5CF6;
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .moving-bar-lottie {
@@ -970,7 +987,7 @@
 }
 
 .pmi-it-container .product-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) translateZ(0);
   box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
   border-color: #A855F7;
 }
