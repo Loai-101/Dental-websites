@@ -85,6 +85,29 @@ const Home = () => {
           </a>
         </div>
       </header>
+
+      {/* Moving Bar Section */}
+      <section className="moving-bar-section">
+        <div className="moving-bar-container">
+          <div className="moving-bar-content">
+            <span className="moving-bar-item">PMI IT ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">PMI Medical ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">PMI Advertising ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">HEALTH CARE ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">PMI IT ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">PMI Medical ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">PMI Advertising ADDING VALUE</span>
+            <span className="moving-bar-separator">•</span>
+            <span className="moving-bar-item">HEALTH CARE ADDING VALUE</span>
+          </div>
+        </div>
+      </section>
       
       <main className="home-main">
         <section className="pmi-divisions-section">

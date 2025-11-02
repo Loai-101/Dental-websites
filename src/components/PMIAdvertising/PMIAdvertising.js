@@ -20,18 +20,9 @@ const PMIAdvertising = () => {
   });
 
   const advertisingProducts = [
-    { name: "Advertising Product 1", logo: "📢" },
-    { name: "Advertising Product 2", logo: "🎯" },
-    { name: "Advertising Product 3", logo: "📺" },
-    { name: "Advertising Product 4", logo: "📱" },
-    { name: "Advertising Product 5", logo: "📊" },
-    { name: "Advertising Product 6", logo: "🎨" },
-    { name: "Advertising Product 7", logo: "📝" },
-    { name: "Advertising Product 8", logo: "📢" },
-    { name: "Advertising Product 9", logo: "🎯" },
-    { name: "Advertising Product 10", logo: "📺" },
-    { name: "Advertising Product 11", logo: "📱" },
-    { name: "Advertising Product 12", logo: "📊" }
+    { name: "TrendSpark PRO", logo: "📊" },
+    { name: "TrendSpark Plus", logo: "📈" },
+    { name: "TrendSpark", logo: "📉" }
   ];
 
   const handleDetailingAids = (productName) => {

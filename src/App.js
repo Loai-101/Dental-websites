@@ -17,9 +17,7 @@ import Login from './components/Login/Login';
 // Import all page components
 import Home from './components/Home/Home';
 import Contact from './components/contact/Contact';
-import FAQ from './components/FAQ/FAQ';
 import Programmers from './components/Programmers/Programmers';
-import Services from './components/Services/Services';
 import PMIIT from './components/PMIIT/PMIIT';
 import PMIMedical from './components/PMIMedical/PMIMedical';
 import PMIAdvertising from './components/PMIAdvertising/PMIAdvertising';
@@ -103,9 +101,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
               <Route path="/programmers" element={<Programmers />} />
-              <Route path="/services" element={<Services />} />
               <Route path="/pmi-it" element={<PMIIT />} />
               <Route path="/pmi-medical" element={<PMIMedical />} />
               <Route path="/pmi-advertising" element={<PMIAdvertising />} />

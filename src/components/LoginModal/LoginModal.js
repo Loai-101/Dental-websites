@@ -8,6 +8,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Check if first login has been used
   const isFirstLoginUsed = localStorage.getItem('pmi_first_login_used') === 'true';
@@ -85,15 +86,66 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
       timeZoneName: 'short'
     });
 
-    const ipAddress = await getClientIP();
-    const userAgent = navigator.userAgent;
-    
-    console.log('📧 Login notification logged successfully!');
-    console.log(`Username: ${username}, Department: ${department}, Time: ${timestamp}`);
-    console.log(`IP Address: ${ipAddress}, User Agent: ${userAgent}`);
-    
-    // Login notification logged successfully
-    console.log('✅ Login notification logged successfully!');
+    const dateOnly = currentDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const timeOnly = currentDate.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    // Detect device type
+    const getDeviceType = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        return 'Mobile';
+      } else if (width <= 768) {
+        return 'Tablet';
+      } else {
+        return 'Desktop';
+      }
+    };
+
+    const deviceType = getDeviceType();
+
+    try {
+      // Prepare form data for FormSubmit
+      const formDataToSend = new FormData();
+      
+      formDataToSend.append('name', username);
+      formDataToSend.append('department', department || 'Unknown');
+      formDataToSend.append('date', dateOnly);
+      formDataToSend.append('time', timeOnly);
+      formDataToSend.append('device_type', deviceType);
+      
+      // FormSubmit Configuration
+      formDataToSend.append('_subject', `🔐 User Login - ${department || 'PMI System'}`);
+      formDataToSend.append('_captcha', 'false');
+      formDataToSend.append('_template', 'table');
+
+      // Send to FormSubmit
+      const response = await fetch('https://formsubmit.co/q9g8moh@gmail.com', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        console.log('✅ Login notification email sent successfully!');
+        console.log(`Name: ${username}, Department: ${department}, Date: ${dateOnly}, Time: ${timeOnly}, Device: ${deviceType}`);
+      } else {
+        console.error('Failed to send login notification email');
+      }
+    } catch (error) {
+      console.error('Error sending login notification:', error);
+      // Don't block login if email fails
+    }
   };
 
   const getClientIP = async () => {
@@ -112,6 +164,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
     setPassword('');
     setError('');
     setIsLoggedIn(false);
+    setShowPassword(false);
   };
 
   if (!isOpen) return null;
@@ -171,14 +224,35 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
             
             <div className="form-group">
               <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
-                required
-              />
+              <div className="password-input-wrapper">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  required
+                  className="password-input"
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
             
             {error && <div className="error-message">{error}</div>}

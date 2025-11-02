@@ -75,10 +75,8 @@ const Navigation = ({ onLogout }) => {
 
   const navigationItems = [
     { path: '/', label: 'Home', icon: '🏠' },
-    { path: '/services', label: 'Services', icon: '⚙️' },
     { path: '/programmers', label: 'Team', icon: '👥' },
-    { path: '/contact', label: 'Contact', icon: '📞' },
-    { path: '/faq', label: 'FAQ', icon: '❓' }
+    { path: '/contact', label: 'Contact', icon: '📞' }
   ];
 
   return (

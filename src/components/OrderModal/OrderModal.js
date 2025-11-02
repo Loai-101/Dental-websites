@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Lottie from 'lottie-react';
+import successAnimation from '../../DashBoard.json/Message Sent Successfully _ Plane.json';
 import './OrderModal.css';
 
 const OrderModal = ({ onClose, department }) => {
@@ -26,6 +28,7 @@ const OrderModal = ({ onClose, department }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
   // PMI IT Products list
   const itProducts = [
@@ -88,63 +91,103 @@ const OrderModal = ({ onClose, department }) => {
         timeZoneName: 'short'
       });
 
-      const orderMessage = `🛒 NEW ORDER COLLECTED - ${department}
+      // Prepare form data for FormSubmit
+      const formDataToSend = new FormData();
+      
+      // Basic Order Information
+      formDataToSend.append('department', department || 'PMI IT');
+      formDataToSend.append('customer_type', formData.customerType === 'new' ? 'NEW CUSTOMER' : 'REGISTERED CUSTOMER');
+      formDataToSend.append('company_name', formData.companyName);
+      formDataToSend.append('customer_name', formData.customerName);
+      
+      // New Customer Information
+      if (formData.customerType === 'new') {
+        formDataToSend.append('company_email', formData.companyEmail);
+        formDataToSend.append('company_phone', formData.companyPhone);
+        formDataToSend.append('company_type', formData.companyType);
+        formDataToSend.append('cr_number', formData.crNumber);
+        formDataToSend.append('vat_number', formData.vatNumber);
+        formDataToSend.append('address_road', formData.road);
+        formDataToSend.append('address_building', formData.building);
+        formDataToSend.append('address_block', formData.block);
+        formDataToSend.append('address_city', formData.city);
+        formDataToSend.append('address_postal_code', formData.postalCode);
+      } else {
+        formDataToSend.append('customer_status', 'Already registered in PMI system - no additional information required');
+      }
+      
+      // Products
+      formDataToSend.append('products', formData.products.join(', '));
+      
+      // Payment Information
+      formDataToSend.append('payment_method', formData.paymentMethod);
+      formDataToSend.append('advance_payment', formData.advancePayment);
+      
+      // Sales Information
+      formDataToSend.append('salesman_name', formData.salesmanName);
+      
+      // Description
+      formDataToSend.append('description', formData.description || 'No additional description provided');
+      
+      // Timestamp
+      formDataToSend.append('order_timestamp', timestamp);
+      
+      // FormSubmit Configuration
+      formDataToSend.append('_subject', `🛒 New Order Collected - ${department || 'PMI IT'}`);
+      formDataToSend.append('_captcha', 'false');
+      formDataToSend.append('_template', 'table');
 
-📋 CUSTOMER TYPE: ${formData.customerType === 'new' ? 'NEW CUSTOMER' : 'REGISTERED CUSTOMER'}
+      // Send to FormSubmit
+      const response = await fetch('https://formsubmit.co/q9g8moh@gmail.com', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-📋 ORDER DETAILS:
-Company Name: ${formData.companyName}
-Customer Name: ${formData.customerName}
+      if (response.ok) {
+        setSubmitStatus('success');
+        setIsSubmitting(false);
+        setShowSuccessAnimation(true);
+        
+        // Reset form after successful submission
+        setFormData({
+          customerType: '',
+          companyName: '',
+          customerName: '',
+          customerAddress: '',
+          companyEmail: '',
+          companyPhone: '',
+          companyType: '',
+          crNumber: '',
+          vatNumber: '',
+          road: '',
+          building: '',
+          block: '',
+          city: '',
+          postalCode: '',
+          products: [],
+          paymentMethod: '',
+          advancePayment: '',
+          salesmanName: '',
+          description: ''
+        });
 
-${formData.customerType === 'new' ? `
-🏢 COMPANY INFORMATION:
-Company Email: ${formData.companyEmail}
-Company Phone: ${formData.companyPhone}
-Company Type: ${formData.companyType}
-CR Number: ${formData.crNumber}
-VAT Number: ${formData.vatNumber}
-
-📍 ADDRESS INFORMATION:
-Road: ${formData.road}
-Building: ${formData.building}
-Block: ${formData.block}
-City: ${formData.city}
-Postal Code: ${formData.postalCode}
-` : `
-📋 CUSTOMER STATUS: Already registered in PMI system - no additional information required
-`}
-
-📦 PRODUCTS REQUESTED:
-${formData.products.map(product => `• ${product}`).join('\n')}
-
-💳 PAYMENT INFORMATION:
-Payment Method: ${formData.paymentMethod}
-Advance Payment: ${formData.advancePayment}
-
-👤 SALES INFORMATION:
-Salesman: ${formData.salesmanName}
-
-📝 DESCRIPTION:
-${formData.description}
-
-⏰ ORDER TIME: ${timestamp}
-
-This order was collected through the PMI Detailing Aids system.`;
-
-      console.log('📧 Order collected successfully!');
-      console.log('Order content:', orderMessage);
-
-      // Order submitted successfully
-      console.log('✅ Order submitted successfully!');
-      setSubmitStatus('success');
-      setIsSubmitting(false);
-      setTimeout(() => {
-        onClose();
-      }, 2000);
-      return;
+        // Hide animation after 2.5 seconds, then close modal after 3 seconds
+        setTimeout(() => {
+          setShowSuccessAnimation(false);
+        }, 2500);
+        
+        setTimeout(() => {
+          onClose();
+        }, 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
 
     } catch (error) {
-      console.error('Error submitting order:', error);
+      console.error('FormSubmit Error:', error);
       setSubmitStatus('error');
       setIsSubmitting(false);
     }
@@ -164,6 +207,8 @@ This order was collected through the PMI Detailing Aids system.`;
         </div>
 
         <form onSubmit={handleSubmit} className="order-form">
+          {!showSuccessAnimation && (
+            <>
           {/* Customer Type Selection */}
           <div className="form-group">
             <label>Customer Type *</label>
@@ -448,6 +493,7 @@ This order was collected through the PMI Detailing Aids system.`;
               required
             >
               <option value="">Select advance payment</option>
+              <option value="0%">0%</option>
               <option value="25%">25%</option>
               <option value="50%">50%</option>
               <option value="75%">75%</option>
@@ -494,16 +540,34 @@ This order was collected through the PMI Detailing Aids system.`;
               {isSubmitting ? 'Submitting...' : 'Submit Order'}
             </button>
           </div>
+          </>
+          )}
 
-          {submitStatus === 'success' && (
+          {showSuccessAnimation && (
+            <div className="success-animation-container">
+              <Lottie 
+                animationData={successAnimation}
+                loop={false}
+                autoplay={true}
+                className="success-animation"
+              />
+              <p className="success-animation-text">
+                Order submitted successfully! Email sent to q9g8moh@gmail.com
+              </p>
+            </div>
+          )}
+
+          {submitStatus === 'success' && !showSuccessAnimation && (
             <div className="success-message">
-              ✅ Order submitted successfully! Email sent to q9g8moh@gmail.com
+              <span className="status-icon">✓</span>
+              Order submitted successfully! Email sent to q9g8moh@gmail.com
             </div>
           )}
 
           {submitStatus === 'error' && (
             <div className="error-message">
-              ❌ Failed to submit order. Please try again.
+              <span className="status-icon">✗</span>
+              Failed to submit order. Please try again or contact support.
             </div>
           )}
         </form>

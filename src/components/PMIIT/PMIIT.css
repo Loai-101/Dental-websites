@@ -2,8 +2,103 @@
 
 .pmi-it-container {
   min-height: 100vh;
+  height: auto;
   background-color: #f8f9fa;
   font-family: 'Arial', sans-serif;
+  position: relative;
+  transition: opacity 0.5s ease-in;
+}
+
+.pmi-it-container.loading-complete {
+  opacity: 1;
+}
+
+/* Loading Overlay */
+.pmi-it-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999 !important;
+  backdrop-filter: blur(10px);
+  animation: fadeInOverlay 0.3s ease-in;
+}
+
+.pmi-it-loading-overlay.fade-out {
+  animation: fadeOutOverlay 0.5s ease-out forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.pmi-it-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.pmi-it-loading-animation {
+  width: 400px;
+  height: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Loading Animation */
+@media (max-width: 768px) {
+  .pmi-it-loading-animation {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pmi-it-loading-animation {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.pmi-it-container > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Header Section */
@@ -160,8 +255,8 @@
     gap: 25px;
   }
   
-  .product-card {
-    padding: 25px 20px;
+  .pmi-it-container .product-card {
+    padding: 40px 30px;
   }
   
   .product-name {
@@ -199,6 +294,31 @@
     height: 45px;
     font-size: 18px;
   }
+
+  .social-icons-moving-bar-section {
+    padding: 25px 15px;
+  }
+
+  .social-icons-moving-bar-section .social-icons-container {
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+
+  .social-icons-moving-bar-section .social-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .social-icons-moving-bar-section .social-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .social-icons-moving-bar-section .order-lottie-icon {
+    width: 40px;
+    height: 40px;
+  }
   
   .pmi-it-main {
     padding: 40px 20px;
@@ -209,8 +329,8 @@
     gap: 20px;
   }
   
-  .product-card {
-    padding: 20px 15px;
+  .pmi-it-container .product-card {
+    padding: 40px 30px;
   }
   
   .product-name {
@@ -258,8 +378,8 @@
     gap: 15px;
   }
   
-  .product-card {
-    padding: 18px 12px;
+  .pmi-it-container .product-card {
+    padding: 40px 30px;
   }
   
   .product-name {
@@ -297,13 +417,46 @@
     height: 35px;
     font-size: 14px;
   }
+
+  .social-icons-moving-bar-section {
+    padding: 15px 10px;
+  }
+
+  .social-icons-moving-bar-section .social-icons-container {
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .social-icons-moving-bar-section .social-icons-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-icons-moving-bar-section .social-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .social-icons-moving-bar-section .social-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .social-icons-moving-bar-section .order-lottie-icon {
+    width: 32px;
+    height: 32px;
+  }
   
   .pmi-it-main {
     padding: 25px 10px;
   }
   
-  .product-card {
-    padding: 15px 10px;
+  .pmi-it-container .product-card {
+    padding: 40px 30px;
   }
   
   .product-name {
@@ -342,13 +495,36 @@
     height: 30px;
     font-size: 12px;
   }
+
+  .social-icons-moving-bar-section {
+    padding: 12px 8px;
+  }
+
+  .social-icons-moving-bar-section .social-icons-container {
+    gap: 8px;
+  }
+
+  .social-icons-moving-bar-section .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .social-icons-moving-bar-section .social-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .social-icons-moving-bar-section .order-lottie-icon {
+    width: 28px;
+    height: 28px;
+  }
   
   .pmi-it-main {
     padding: 20px 8px;
   }
   
-  .product-card {
-    padding: 12px 8px;
+  .pmi-it-container .product-card {
+    padding: 40px 30px;
   }
   
   .product-name {
@@ -378,6 +554,29 @@
     height: 25px;
     font-size: 10px;
   }
+
+  .social-icons-moving-bar-section {
+    padding: 10px 5px;
+  }
+
+  .social-icons-moving-bar-section .social-icons-container {
+    gap: 6px;
+  }
+
+  .social-icons-moving-bar-section .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-icons-moving-bar-section .social-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .social-icons-moving-bar-section .order-lottie-icon {
+    width: 26px;
+    height: 26px;
+  }
 }
 
 .pmi-it-container .page-title {
@@ -394,16 +593,191 @@
   margin: 0 0 30px 0;
 }
 
+/* Social Icons Section - Under Hero */
+/* Merged Section: Social Icons + Moving Bar */
+.social-icons-moving-bar-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 30px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.social-icons-moving-bar-section .moving-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.social-icons-moving-bar-section .moving-bar-content {
+  opacity: 0.3;
+}
+
+.social-icons-moving-bar-section .moving-bar-icon {
+  opacity: 0.4;
+}
+
+.social-icons-moving-bar-section .social-icons-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.social-icons-moving-bar-section .social-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 2px solid #8B5CF6;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  backdrop-filter: blur(10px);
+  color: #8B5CF6;
+}
+
+.social-icons-moving-bar-section .social-icon:hover {
+  transform: translateY(-5px) scale(1.1);
+  background: rgba(139, 92, 246, 0.25);
+  border-color: #A855F7;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  color: #A855F7;
+}
+
+.social-icons-moving-bar-section .order-icon {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 100 !important;
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 2px solid #8B5CF6 !important;
+}
+
+.social-icons-moving-bar-section .order-icon:hover {
+  transform: translateY(-5px) scale(1.1) !important;
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: #A855F7 !important;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5) !important;
+}
+
+.order-lottie-icon {
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+/* Responsive Order Lottie Icon */
+@media (max-width: 1024px) {
+  .order-lottie-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-lottie-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-lottie-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  .order-lottie-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 320px) {
+  .order-lottie-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 /* Main Content */
 .pmi-it-main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 20px;
+  position: relative;
+}
+
+/* Full Page Background Animation */
+.page-background-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  font-size: 0;
+}
+
+.page-background-animation > div {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  display: block !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.background-image {
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0.2;
+  object-fit: cover;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  line-height: 0 !important;
+  vertical-align: top !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 /* Products Section */
 .products-section {
   margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .products-grid {
@@ -417,6 +791,10 @@
 /* PMI IT - White cards with purple borders - Updated */
 .pmi-it-container .product-card {
   background: white;
+  background-image: url('https://res.cloudinary.com/dvybb2xnc/image/upload/v1762064431/Screenshot_2025-11-02_092017_biizor.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 15px;
   padding: 40px 30px;
   text-align: center;
@@ -425,6 +803,134 @@
   border: 2px solid #8B5CF6;
   position: relative;
   overflow: hidden;
+}
+
+/* Overlay for better text readability */
+.pmi-it-container .product-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+  border-radius: 15px;
+}
+
+/* Moving Bar Section (Standalone - if needed elsewhere) */
+.moving-bar-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.moving-bar-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.moving-bar-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  white-space: nowrap;
+  animation: scrollBar 60s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scrollBar {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.moving-bar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 2px solid #8B5CF6;
+  border-radius: 50%;
+  color: #8B5CF6;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.moving-bar-lottie {
+  width: 48px;
+  height: 48px;
+}
+
+.moving-bar-separator {
+  color: rgba(139, 92, 246, 0.5);
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Responsive Moving Bar */
+@media (max-width: 768px) {
+  .moving-bar-section {
+    padding: 15px 0;
+  }
+  
+  .moving-bar-icon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .moving-bar-lottie {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .moving-bar-separator {
+    font-size: 1.2rem;
+  }
+  
+  .moving-bar-content {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .moving-bar-section {
+    padding: 12px 0;
+  }
+  
+  .moving-bar-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .moving-bar-lottie {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .moving-bar-separator {
+    font-size: 1rem;
+  }
+  
+  .moving-bar-content {
+    gap: 20px;
+  }
+}
+
+/* Ensure card content appears above overlay */
+.pmi-it-container .product-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .pmi-it-container .product-card::before {
@@ -436,6 +942,7 @@
   height: 4px;
   background: linear-gradient(90deg, #8B5CF6, #A855F7);
   transition: all 0.3s ease;
+  z-index: 2;
 }
 
 .pmi-it-container .product-card:hover {
@@ -455,6 +962,8 @@
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .pmi-it-container .product-card:hover .product-logo {
