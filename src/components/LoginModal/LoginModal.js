@@ -104,7 +104,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
     const deviceType = getDeviceType();
 
     try {
-      // Prepare form data for FormSubmit
+      // Prepare form data for Web3Forms
       const formDataToSend = new FormData();
       
       formDataToSend.append('name', username);
@@ -113,25 +113,30 @@ const LoginModal = ({ isOpen, onClose, onLogin, productName = '' }) => {
       formDataToSend.append('time', timeOnly);
       formDataToSend.append('device_type', deviceType);
       
-      // FormSubmit Configuration
-      formDataToSend.append('_subject', `🔐 User Login - ${department || 'PMI System'}`);
-      formDataToSend.append('_captcha', 'false');
-      formDataToSend.append('_template', 'table');
+      // Web3Forms Configuration
+      // Add Web3Forms access key from environment variable
+      const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || '89a8800e-cc7f-4b86-b4c1-65407061b62c';
+      formDataToSend.append('access_key', accessKey);
+      
+      // Set recipient email
+      formDataToSend.append('to', 'pmiteam@pmi-me.net');
+      
+      // Set subject
+      formDataToSend.append('subject', `🔐 User Login - ${department || 'PMI System'}`);
 
-      // Send to FormSubmit
-      const response = await fetch('https://formsubmit.co/pmiteam@pmi-me.net', {
+      // Send to Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: formDataToSend
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         console.log('✅ Login notification email sent successfully!');
         console.log(`Name: ${username}, Department: ${department}, Date: ${dateOnly}, Time: ${timeOnly}, Device: ${deviceType}`);
       } else {
-        console.error('Failed to send login notification email');
+        console.error('Failed to send login notification email:', data.message);
       }
     } catch (error) {
       console.error('Error sending login notification:', error);
