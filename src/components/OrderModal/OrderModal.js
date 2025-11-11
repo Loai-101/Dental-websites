@@ -92,7 +92,7 @@ const OrderModal = ({ onClose, department }) => {
         timeZoneName: 'short'
       });
 
-      // Prepare form data for FormSubmit
+      // Prepare form data for Web3Forms
       const formDataToSend = new FormData();
       
       // Basic Order Information
@@ -136,21 +136,26 @@ const OrderModal = ({ onClose, department }) => {
       // Timestamp
       formDataToSend.append('order_timestamp', timestamp);
       
-      // FormSubmit Configuration
-      formDataToSend.append('_subject', `🛒 New Order Collected - ${department || 'PMI IT'}`);
-      formDataToSend.append('_captcha', 'false');
-      formDataToSend.append('_template', 'table');
+      // Web3Forms Configuration
+      // Add Web3Forms access key from environment variable
+      const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || '05af0c14-df7b-45c3-9572-48b91a5385f8';
+      formDataToSend.append('access_key', accessKey);
+      
+      // Set recipient email
+      formDataToSend.append('to', 'pmiteam@pmi-me.net');
+      
+      // Set subject
+      formDataToSend.append('subject', `🛒 New Order Collected - ${department || 'PMI IT'}`);
 
-      // Send to FormSubmit
-      const response = await fetch('https://formsubmit.co/pmiteam@pmi-me.net', {
+      // Send to Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: formDataToSend
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         setSubmitStatus('success');
         setIsSubmitting(false);
         setShowSuccessAnimation(true);
@@ -188,11 +193,12 @@ const OrderModal = ({ onClose, department }) => {
           onClose();
         }, 3000);
       } else {
-        throw new Error('Form submission failed');
+        console.log('Error', data);
+        throw new Error(data.message || 'Form submission failed');
       }
 
     } catch (error) {
-      console.error('FormSubmit Error:', error);
+      console.error('Web3Forms Error:', error);
       setSubmitStatus('error');
       setIsSubmitting(false);
     }
