@@ -38,6 +38,16 @@ const OrderModal = ({ onClose, department }) => {
     'InfoEdge', 'VetCare', 'CureLink', 'DashBoard', 'Analytics Pro', 'CloudSync'
   ];
 
+  // PMI Medical Products list
+  const medicalProducts = [
+    'SHOFO', 'BISICO', 'CHM', 'SANCTUARY', 'AL MARAM', 'STARLYNER',
+    'Medical Product 7', 'Medical Product 8', 'Medical Product 9',
+    'Medical Product 10', 'Medical Product 11', 'Medical Product 12'
+  ];
+
+  // Select products based on department
+  const products = department === 'PMI Medical' ? medicalProducts : itProducts;
+
   // Auto-fill salesman name from localStorage (from login session) if it matches available options
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser');
@@ -206,7 +216,7 @@ const OrderModal = ({ onClose, department }) => {
 
   return (
     <div className="order-modal-overlay">
-      <div className="order-modal">
+      <div className={`order-modal ${department === 'PMI Medical' ? 'pmi-medical-modal' : ''}`}>
         <div className="order-modal-header">
           <h2>Collect Order - {department}</h2>
           <button className="close-button" onClick={onClose}>
@@ -463,7 +473,7 @@ const OrderModal = ({ onClose, department }) => {
 
             {/* Products Selection Grid */}
             <div className="products-grid">
-              {itProducts.map((product, index) => (
+              {products.map((product, index) => (
                 <label key={index} className="product-checkbox">
                   <input
                     type="checkbox"

@@ -623,3 +623,86 @@
     font-size: 14px;
   }
 }
+
+/* PMI Medical Blue Theme */
+.pmi-medical-modal .order-modal-header {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+}
+
+.pmi-medical-modal .form-group input:focus,
+.pmi-medical-modal .form-group textarea:focus,
+.pmi-medical-modal .form-group select:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.pmi-medical-modal .product-checkbox:hover {
+  border-color: #3B82F6;
+}
+
+.pmi-medical-modal .product-checkbox input[type="checkbox"]:checked + span {
+  color: #3B82F6;
+  font-weight: 600;
+}
+
+.pmi-medical-modal .product-checkbox:has(input[type="checkbox"]:checked) {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3B82F6;
+}
+
+.pmi-medical-modal .selected-products-tags {
+  background: rgba(59, 130, 246, 0.05);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+.pmi-medical-modal .selected-products-tags h4 {
+  color: #3B82F6;
+}
+
+.pmi-medical-modal .product-tag {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.pmi-medical-modal .customer-type-option:hover {
+  border-color: #3B82F6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+.pmi-medical-modal .customer-type-option input[type="checkbox"]:checked ~ .option-content {
+  color: #3B82F6;
+}
+
+.pmi-medical-modal .customer-type-option:has(input[type="checkbox"]:checked) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(29, 78, 216, 0.05) 100%);
+  border-color: #3B82F6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+}
+
+.pmi-medical-modal .customer-type-option:hover .checkbox-custom {
+  border-color: #3B82F6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.pmi-medical-modal .customer-type-option input[type="checkbox"]:checked + .checkbox-custom {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  border-color: #3B82F6;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.pmi-medical-modal .section-divider h3 {
+  color: #3B82F6;
+}
+
+.pmi-medical-modal .section-divider h3::before {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+}
+
+.pmi-medical-modal .submit-button {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.pmi-medical-modal .submit-button:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
