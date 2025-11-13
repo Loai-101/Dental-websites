@@ -139,6 +139,18 @@
   color: #1D4ED8;
 }
 
+.pmi-medical-container .product-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.pmi-medical-container .product-card:hover .product-logo-image {
+  transform: scale(1.1);
+}
+
 .pmi-medical-container .product-name {
   font-size: 1.3rem;
   font-weight: 700;
@@ -184,15 +196,27 @@
 }
 
 .demo-button {
-  border-color: #10B981;
-  color: #10B981;
+  border-color: #3B82F6;
+  color: #3B82F6;
 }
 
 .demo-button:hover {
-  background: #10B981;
+  background: #3B82F6;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.pmi-medical-container .catalog-button {
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+
+.pmi-medical-container .catalog-button:hover {
+  background: #3B82F6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 /* Responsive Design */
