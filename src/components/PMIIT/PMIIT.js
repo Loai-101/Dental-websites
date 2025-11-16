@@ -216,15 +216,15 @@ const PMIIT = () => {
   });
 
   const itProducts = [
-    { name: "WebTailor", logo: "lottie", animation: websiteBuildingAnimation },
-    { name: "FlexSite", logo: "lottie", animation: seoAnimation },
-    { name: "FlowPay", logo: "lottie", animation: paymentAnimation },
+    { name: "WebTailor", logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024944/WhatsApp_Image_2025-11-13_at_11.52.58_96091a7a_dtqaxu.jpg", animation: websiteBuildingAnimation },
+    { name: "FlexSite", logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024940/WhatsApp_Image_2025-11-13_at_11.52.58_047ce4ac_h6bq9r.jpg", animation: seoAnimation },
+    { name: "FlowPay", logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024940/WhatsApp_Image_2025-11-13_at_11.52.58_a5441459_q1hkgr.jpg", animation: paymentAnimation },
     { name: "WorkFlow", logo: "lottie", animation: wheelRotationAnimation },
     { name: "MonoMarket", logo: "lottie", animation: shoppingCartAnimation },
     { name: "EstateLink", logo: "lottie", animation: homeAnimation },
     { name: "WorkHub for Companies", logo: "lottie", animation: companyFormAnimation },
     { name: "InfoEdge", logo: "lottie", animation: verificationAnimation },
-    { name: "VetCare", logo: "lottie", animation: animalCareAnimation },
+    { name: "VetCare", logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024942/WhatsApp_Image_2025-11-13_at_11.52.58_d96f091f_f3a3wt.jpg", animation: animalCareAnimation },
     { name: "CureLink", logo: "lottie", animation: doctorAnimation },
     { name: "LineMaster", logo: "lottie", animation: dynamicCubeLineAnimation },
     { name: "MarinaFlow", logo: "lottie", animation: containerShipAnimation }
@@ -295,18 +295,20 @@ const PMIIT = () => {
     shoppingCartAnimation
   ];
 
+  // Product-specific Google Drive links for Detailing Aids
+  const detailingAidsLinks = {
+    "WebTailor": "https://drive.google.com/file/d/1GR8cyaH-SNRNyXKtusjoW7nCkn5fjFoO/view?usp=drive_link",
+    "FlexSite": "https://drive.google.com/file/d/1z2ZLFOVE4PH5tW17VKQ-6BbW_0mQKH_0/view?usp=drive_link",
+    "FlowPay": "https://drive.google.com/file/d/1XuA68fM4poHet2OBCoETk53FsPrETnEN/view?usp=drive_link",
+    "VetCare": "https://drive.google.com/file/d/1-Ramb8Qjvm2bwpy2_RHjiFDs40wiozfp/view?usp=drive_link"
+  };
+
   const handleDetailingAids = (productName) => {
-    // If FlowPay, open modal (same as demo)
-    if (productName === "FlowPay") {
-      setShowFlowPayModal(true);
+    // Check if product has a detailing aids link
+    if (detailingAidsLinks[productName]) {
+      window.open(detailingAidsLinks[productName], '_blank');
       return;
     }
-    
-    // Only WebTailor has a link for now - others will be empty until links are provided
-    if (productName === "WebTailor") {
-      window.open('https://drive.google.com/file/d/1fhv8QN33UYoY_DCHbuE_QPjWZ-N98LUe/view?usp=drive_link', '_blank');
-    }
-    // Other products - buttons are empty/disabled until links are provided
   };
 
   const handleDemo = (productName) => {
@@ -590,6 +592,14 @@ const PMIIT = () => {
                       loop={true}
                       autoplay={true}
                     />
+                  ) : product.logo && product.logo.startsWith('http') ? (
+                    <img 
+                      src={product.logo} 
+                      alt={`${product.name} Logo`}
+                      className="product-logo-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   ) : (
                     <span className="product-logo-icon">{product.logo}</span>
                   )}
@@ -597,9 +607,9 @@ const PMIIT = () => {
                 <h3 className="product-name">{product.name}</h3>
                 <div className="product-buttons">
                   <button 
-                    className={`product-button detailing-button ${(product.name !== "WebTailor" && product.name !== "FlowPay") ? 'disabled' : ''}`}
+                    className={`product-button detailing-button ${!detailingAidsLinks[product.name] ? 'disabled' : ''}`}
                     onClick={() => handleDetailingAids(product.name)}
-                    disabled={product.name !== "WebTailor" && product.name !== "FlowPay"}
+                    disabled={!detailingAidsLinks[product.name]}
                   >
                     Detailing Aids
                   </button>
