@@ -64,6 +64,22 @@ const RedirectHandler = ({ children, onLogout }) => {
   return children;
 };
 
+// Component to handle authentication check with route awareness
+const AuthWrapper = ({ children, isAuthenticated, onLogin, onLogout }) => {
+  const location = useLocation();
+  
+  // Allow direct access to PMI IT and PMI Medical without authentication
+  const publicRoutes = ['/pmi-it', '/pmi-medical'];
+  const isPublicRoute = publicRoutes.includes(location.pathname);
+  
+  // If not authenticated and not on a public route, show login
+  if (!isAuthenticated && !isPublicRoute) {
+    return <Login onLogin={onLogin} />;
+  }
+  
+  return children;
+};
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,31 +102,32 @@ function App() {
     return <Loading />;
   }
 
-  // Show login page if not authenticated
-  if (!isAuthenticated) {
-    return <Login onLogin={handleLogin} />;
-  }
-
   return (
     <Router>
-      <RedirectHandler onLogout={handleLogout}>
-        <div className="App">
-          <ScrollToTop />
-          <Navigation onLogout={handleLogout} />
-          <main className="App-main">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/programmers" element={<Programmers />} />
-              <Route path="/pmi-it" element={<PMIIT />} />
-              <Route path="/pmi-medical" element={<PMIMedical />} />
-              <Route path="/pmi-advertising" element={<PMIAdvertising />} />
-              <Route path="/webtailor-demo" element={<WebTailorDemo />} />
-              <Route path="/detailing-aids/:department/:product" element={<DetailingAids />} />
-            </Routes>
-          </main>
-        </div>
-      </RedirectHandler>
+      <AuthWrapper 
+        isAuthenticated={isAuthenticated} 
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      >
+        <RedirectHandler onLogout={handleLogout}>
+          <div className="App">
+            <ScrollToTop />
+            <Navigation onLogout={handleLogout} />
+            <main className="App-main">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/programmers" element={<Programmers />} />
+                <Route path="/pmi-it" element={<PMIIT />} />
+                <Route path="/pmi-medical" element={<PMIMedical />} />
+                <Route path="/pmi-advertising" element={<PMIAdvertising />} />
+                <Route path="/webtailor-demo" element={<WebTailorDemo />} />
+                <Route path="/detailing-aids/:department/:product" element={<DetailingAids />} />
+              </Routes>
+            </main>
+          </div>
+        </RedirectHandler>
+      </AuthWrapper>
     </Router>
   );
 }

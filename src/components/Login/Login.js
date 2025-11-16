@@ -72,7 +72,7 @@ const Login = ({ onLogin }) => {
               <span className="login-logo-initials">PMI</span>
             </div>
           </div>
-          <h1 className="login-title">PMI Detailing Aids</h1>
+          <h1 className="login-title">PMI DA</h1>
           <p className="login-subtitle">Please sign in to continue</p>
         </div>
 

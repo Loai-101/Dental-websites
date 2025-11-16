@@ -6,6 +6,93 @@
   font-family: 'Arial', sans-serif;
 }
 
+.pmi-medical-container.loading-complete {
+  transition: opacity 0.5s ease-in;
+}
+
+/* Loading Overlay */
+.pmi-medical-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999 !important;
+  animation: fadeInOverlay 0.3s ease-in;
+  transform: translateZ(0);
+}
+
+.pmi-medical-loading-overlay.fade-out {
+  animation: fadeOutOverlay 0.5s ease-out forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.pmi-medical-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.pmi-medical-loading-animation {
+  width: 400px;
+  height: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Loading Animation */
+@media (max-width: 768px) {
+  .pmi-medical-loading-animation {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pmi-medical-loading-animation {
+    width: 250px;
+    height: 250px;
+  }
+}
+
 /* Header Section */
 .pmi-medical-header {
   color: white;

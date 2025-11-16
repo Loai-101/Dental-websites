@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSEO } from '../../hooks/useSEO';
 import Lottie from 'lottie-react';
 import OrderModal from '../OrderModal/OrderModal';
 import shoppingCartAnimation from '../../DashBoard.json/shopping cart (2).json';
+import loadingTextAnimation from '../../DashBoard.json/Loading text.json';
 import './PMIMedical.css';
 
 const PMIMedical = () => {
   const navigate = useNavigate();
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const containerRef = useRef(null);
   
   // SEO configuration
   useSEO({
@@ -58,13 +62,7 @@ const PMIMedical = () => {
         { label: "Detailing Aids", url: "https://drive.google.com/file/d/1jPs2-u8Qnd1C76GAmsGpCVw___RzeQr8/view?usp=drive_link", className: "detailing-button" },
         { label: "Catalog", url: "https://drive.google.com/file/d/1qy3fLpdsOYXorx_Whlhiyoxjr5wVcMRI/view?usp=drive_link", className: "catalog-button" }
       ]
-    },
-    { name: "Medical Product 7", logo: "📋" },
-    { name: "Medical Product 8", logo: "🏥" },
-    { name: "Medical Product 9", logo: "🩺" },
-    { name: "Medical Product 10", logo: "💊" },
-    { name: "Medical Product 11", logo: "🩹" },
-    { name: "Medical Product 12", logo: "🧬" }
+    }
   ];
 
   const handleDetailingAids = (productName) => {
@@ -82,8 +80,131 @@ const PMIMedical = () => {
     window.open(catalogUrl, '_blank');
   };
 
+  // Handle page loading - wait for images and content to load
+  useEffect(() => {
+    let minimumDisplayTime = 2000; // Minimum time to show loading (2 seconds)
+    const startTime = Date.now();
+    
+    const handlePageLoad = () => {
+      // Wait for window to be fully loaded first
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', handlePageLoad, { once: true });
+        return;
+      }
+
+      // Check if all images are loaded
+      const images = containerRef.current?.querySelectorAll('img');
+      
+      const finishLoading = () => {
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minimumDisplayTime - elapsedTime);
+        
+        console.log('Page loaded, waiting', remainingTime, 'ms before hiding loader');
+        
+        setTimeout(() => {
+          // Start fade out animation
+          setIsFadingOut(true);
+          // After fade out completes, hide loading completely
+          setTimeout(() => {
+            setIsLoading(false);
+            console.log('Loading complete, page visible');
+          }, 500); // Match fadeOutOverlay animation duration
+        }, remainingTime);
+      };
+      
+      if (images && images.length > 0) {
+        let loadedCount = 0;
+        const totalImages = images.length;
+        let allLoaded = false;
+        
+        console.log('Found', totalImages, 'images to load');
+        
+        const checkImageLoad = () => {
+          loadedCount++;
+          console.log('Image loaded:', loadedCount, '/', totalImages);
+          if (loadedCount === totalImages && !allLoaded) {
+            allLoaded = true;
+            console.log('All images loaded');
+            // Wait a bit more for Lottie animations to initialize
+            setTimeout(() => {
+              finishLoading();
+            }, 300);
+          }
+        };
+        
+        images.forEach((img) => {
+          if (img.complete && img.naturalWidth !== 0) {
+            checkImageLoad();
+          } else {
+            img.addEventListener('load', checkImageLoad, { once: true });
+            img.addEventListener('error', checkImageLoad, { once: true }); // Continue even if image fails
+          }
+        });
+        
+        // If all images were already loaded
+        if (loadedCount === totalImages) {
+          setTimeout(() => {
+            finishLoading();
+          }, 300);
+        }
+        
+        // Fallback: if images don't fire events, wait for minimum time
+        setTimeout(() => {
+          if (!allLoaded) {
+            allLoaded = true;
+            console.log('Timeout: forcing finish loading');
+            finishLoading();
+          }
+        }, 5000);
+      } else {
+        // No images found yet, wait a bit and check again or wait minimum time
+        setTimeout(() => {
+          const retryImages = containerRef.current?.querySelectorAll('img');
+          if (retryImages && retryImages.length > 0) {
+            console.log('Retrying with', retryImages.length, 'images');
+            handlePageLoad();
+          } else {
+            console.log('No images found, finishing loading');
+            finishLoading();
+          }
+        }, 1000);
+      }
+    };
+
+    // Delay to ensure DOM is fully rendered
+    const timeoutId = setTimeout(handlePageLoad, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
-    <div className="pmi-medical-container">
+    <>
+      {/* Loading Overlay - Show first, before everything */}
+      {isLoading && (
+        <div className={`pmi-medical-loading-overlay ${isFadingOut ? 'fade-out' : ''}`}>
+          <div className="pmi-medical-loading-content">
+            <Lottie 
+              animationData={loadingTextAnimation}
+              loop={true}
+              autoplay={true}
+              className="pmi-medical-loading-animation"
+            />
+          </div>
+        </div>
+      )}
+      
+      {/* Page Content - Hidden while loading */}
+      <div 
+        className={`pmi-medical-container ${!isLoading ? 'loading-complete' : ''}`} 
+        ref={containerRef} 
+        style={{ 
+          opacity: isLoading ? 0 : 1, 
+          pointerEvents: isLoading ? 'none' : 'auto', 
+          visibility: isLoading ? 'hidden' : 'visible' 
+        }}
+      >
       <header className="pmi-medical-header">
         <div className="hero-image-background">
           <img 
@@ -248,7 +369,8 @@ const PMIMedical = () => {
         />,
         document.body
       ) : null}
-    </div>
+      </div>
+    </>
   );
 };
 

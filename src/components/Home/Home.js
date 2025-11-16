@@ -11,26 +11,26 @@ const Home = () => {
   
   // SEO configuration
   useSEO({
-    title: "PMI Medical Websites Showroom - Professional Clinic Website Design",
-    description: "Discover our premium collection of medical clinic websites. Professional, modern, and tailored designs for dental, dermatology, cardiology, and more medical specialties.",
-    keywords: "medical websites, clinic websites, dental websites, dermatology websites, cardiology websites, healthcare websites, medical practice websites, PMI",
+    title: "PMI DA - Professional IT, Medical & Advertising Solutions",
+    description: "Explore PMI's comprehensive detailing aids and solutions across IT, Medical, and Advertising departments. Professional tools and services for modern businesses.",
+    keywords: "PMI DA, PMI detailing aids, IT solutions, medical solutions, advertising solutions, business tools, professional services, PMI",
     canonical: "https://pmi-showroom-website.com/",
-    ogTitle: "PMI Medical Websites Showroom - Professional Clinic Website Design",
-    ogDescription: "Discover our premium collection of medical clinic websites. Professional, modern, and tailored designs for dental, dermatology, cardiology, and more medical specialties.",
+    ogTitle: "PMI DA - Professional IT, Medical & Advertising Solutions",
+    ogDescription: "Explore PMI's comprehensive detailing aids and solutions across IT, Medical, and Advertising departments. Professional tools and services for modern businesses.",
     ogUrl: "https://pmi-showroom-website.com/",
-    twitterTitle: "PMI Medical Websites Showroom - Professional Clinic Website Design",
-    twitterDescription: "Discover our premium collection of medical clinic websites. Professional, modern, and tailored designs for dental, dermatology, cardiology, and more medical specialties."
+    twitterTitle: "PMI DA - Professional IT, Medical & Advertising Solutions",
+    twitterDescription: "Explore PMI's comprehensive detailing aids and solutions across IT, Medical, and Advertising departments. Professional tools and services for modern businesses."
   });
 
 
   const handlePMIITClick = () => {
-    setCurrentDivision('PMI IT');
-    setIsLoginModalOpen(true);
+    // Navigate directly to PMI IT without login requirement
+    navigate('/pmi-it');
   };
 
   const handlePMIMedicalClick = () => {
-    setCurrentDivision('PMI Medical');
-    setIsLoginModalOpen(true);
+    // Navigate directly to PMI Medical without login requirement
+    navigate('/pmi-medical');
   };
 
   const handlePMIAdvertisingClick = () => {
@@ -74,7 +74,7 @@ const Home = () => {
           </div>
         </div>
         <div className="hero-content">
-          <h1 className="home-title">Welcome to PMI Detailing Aids</h1>
+          <h1 className="home-title">Welcome to PMI DA</h1>
           <a 
             href="https://pmi-me.net/" 
             target="_blank" 

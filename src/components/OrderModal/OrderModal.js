@@ -40,9 +40,7 @@ const OrderModal = ({ onClose, department }) => {
 
   // PMI Medical Products list
   const medicalProducts = [
-    'SHOFO', 'BISICO', 'CHM', 'SANCTUARY', 'AL MARAM', 'STARLYNER',
-    'Medical Product 7', 'Medical Product 8', 'Medical Product 9',
-    'Medical Product 10', 'Medical Product 11', 'Medical Product 12'
+    'SHOFO', 'BISICO', 'CHM', 'SANCTUARY', 'AL MARAM', 'STARLYNER'
   ];
 
   // Select products based on department
