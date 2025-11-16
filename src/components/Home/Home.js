@@ -127,7 +127,7 @@ const Home = () => {
                 className="division-button division-button-purple"
                 onClick={handlePMIITClick}
               >
-                View Detailing Aids
+                View DA
               </button>
             </div>
             
@@ -146,7 +146,7 @@ const Home = () => {
                 className="division-button division-button-blue"
                 onClick={handlePMIMedicalClick}
               >
-                View Detailing Aids
+                View DA
               </button>
             </div>
             
@@ -165,7 +165,7 @@ const Home = () => {
                 className="division-button division-button-orange"
                 onClick={handlePMIAdvertisingClick}
               >
-                View Detailing Aids
+                View DA
               </button>
             </div>
           </div>

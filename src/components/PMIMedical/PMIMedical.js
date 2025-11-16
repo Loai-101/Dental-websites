@@ -43,7 +43,7 @@ const PMIMedical = () => {
       name: "SANCTUARY", 
       logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024941/WhatsApp_Image_2025-11-13_at_11.52.58_43d51ab8_vglgyr.jpg",
       customButtons: [
-        { label: "Detailing Aids", url: "https://drive.google.com/file/d/1LF_YC5kQt6F6YQ4ZVN1Fc7PZMUXULnZ_/view?usp=drive_link", className: "detailing-button" },
+        { label: "View DA", url: "https://drive.google.com/file/d/1LF_YC5kQt6F6YQ4ZVN1Fc7PZMUXULnZ_/view?usp=drive_link", className: "detailing-button" },
         { label: "Catalog", url: "https://drive.google.com/file/d/11uXBRoYjappxusMB1E5XCCWY-7xg7Cdw/view?usp=drive_link", className: "catalog-button" }
       ]
     },
@@ -51,7 +51,7 @@ const PMIMedical = () => {
       name: "AL MARAM", 
       logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024941/WhatsApp_Image_2025-11-13_at_11.52.58_2ea78d56_ygocqm.jpg",
       customButtons: [
-        { label: "Detailing Aids", url: "https://drive.google.com/file/d/1DLO79hbHBlf8mORvZm6gvXhLggSpODcH/view?usp=drive_link", className: "detailing-button" },
+        { label: "View DA", url: "https://drive.google.com/file/d/1DLO79hbHBlf8mORvZm6gvXhLggSpODcH/view?usp=drive_link", className: "detailing-button" },
         { label: "Catalog", url: "https://drive.google.com/file/d/1z-7iFrYhvYQjYv1La0XBwa4Wm9wi7h9R/view?usp=drive_link", className: "catalog-button" }
       ]
     },
@@ -59,7 +59,7 @@ const PMIMedical = () => {
       name: "STARLYNER", 
       logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1763024944/WhatsApp_Image_2025-11-13_at_11.52.58_46e03b20_gb77ib.jpg",
       customButtons: [
-        { label: "Detailing Aids", url: "https://drive.google.com/file/d/1jPs2-u8Qnd1C76GAmsGpCVw___RzeQr8/view?usp=drive_link", className: "detailing-button" },
+        { label: "View DA", url: "https://drive.google.com/file/d/1jPs2-u8Qnd1C76GAmsGpCVw___RzeQr8/view?usp=drive_link", className: "detailing-button" },
         { label: "Catalog", url: "https://drive.google.com/file/d/1qy3fLpdsOYXorx_Whlhiyoxjr5wVcMRI/view?usp=drive_link", className: "catalog-button" }
       ]
     }
@@ -344,7 +344,7 @@ const PMIMedical = () => {
                         className="product-button detailing-button"
                         onClick={() => handleDetailingAids(product.name)}
                       >
-                        Detailing Aids
+                        View DA
                       </button>
                       <button 
                         className="product-button demo-button"

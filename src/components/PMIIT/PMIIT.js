@@ -611,7 +611,7 @@ const PMIIT = () => {
                     onClick={() => handleDetailingAids(product.name)}
                     disabled={!detailingAidsLinks[product.name]}
                   >
-                    Detailing Aids
+                    View DA
                   </button>
                   <button 
                     className="product-button demo-button"

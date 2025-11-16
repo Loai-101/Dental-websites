@@ -1024,6 +1024,18 @@
   transition: all 0.3s ease;
 }
 
+.product-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.pmi-it-container .product-card:hover .product-logo-image {
+  transform: scale(1.1);
+}
+
 .pmi-it-container .product-card:hover .product-logo-icon {
   color: #A855F7;
 }

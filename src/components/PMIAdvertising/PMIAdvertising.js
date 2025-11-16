@@ -64,7 +64,7 @@ const PMIAdvertising = () => {
                     className="product-button detailing-button"
                     onClick={() => handleDetailingAids(product.name)}
                   >
-                    Detailing Aids
+                    View DA
                   </button>
                   <button 
                     className="product-button demo-button"
