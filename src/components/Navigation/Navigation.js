@@ -107,7 +107,7 @@ const Navigation = ({ onLogout }) => {
             <div className="logo-fallback" style={{ display: 'flex' }}>
               <span className="logo-initials">PMI</span>
             </div>
-                         <h1 className="logo-text">DA</h1>
+                         <h1 className="logo-text">PMI DA</h1>
           </Link>
         </div>
         
