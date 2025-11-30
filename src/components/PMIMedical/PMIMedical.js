@@ -62,6 +62,30 @@ const PMIMedical = () => {
         { label: "View DA", url: "https://drive.google.com/file/d/1jPs2-u8Qnd1C76GAmsGpCVw___RzeQr8/view?usp=drive_link", className: "detailing-button" },
         { label: "Catalog", url: "https://drive.google.com/file/d/1qy3fLpdsOYXorx_Whlhiyoxjr5wVcMRI/view?usp=drive_link", className: "catalog-button" }
       ]
+    },
+    { 
+      name: "JIAJIAN", 
+      logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1764501067/11_sfrbeq.jpg",
+      customButtons: [
+        { label: "View DA", url: "https://drive.google.com/file/d/1es7Qoz__pHMCHC114CKz-L-3owwR_-TI/view?usp=drive_link", className: "detailing-button" },
+        { label: "Catalog", url: "https://drive.google.com/file/d/1Fqd8mxb94zmMhd9A5Ia0z8dTiGrEKbm1/view?usp=drive_link", className: "catalog-button" }
+      ]
+    },
+    { 
+      name: "DETROX", 
+      logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1764501067/12_zfdvkf.jpg",
+      customButtons: [
+        { label: "View DA", url: "https://drive.google.com/file/d/1xm0gzaveECPZfBrnWgOHVBjVCVr6SaMQ/view?usp=drive_link", className: "detailing-button" },
+        { label: "Catalog", url: "https://drive.google.com/file/d/1uLHdQmt8UJKqeHcCxHXfYtwff_Xq1RlS/view?usp=drive_link", className: "catalog-button" }
+      ]
+    },
+    { 
+      name: "JERAHA", 
+      logo: "https://res.cloudinary.com/dvybb2xnc/image/upload/v1764501067/13_dvteln.jpg",
+      catalogs: [
+        { label: "Catalog Jeraha Dental", url: "https://drive.google.com/file/d/1Ng3keK1LUpwokYtnHZAwrJEablvMdFct/view?usp=drive_link" },
+        { label: "Catalog Jeraha Industrial", url: "https://app.luminpdf.com/viewer/692c29a6e96011f906dbc552" }
+      ]
     }
   ];
 
